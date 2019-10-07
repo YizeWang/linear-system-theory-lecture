@@ -1,0 +1,284 @@
+\documentclass[fleqn, 10.5pt, a4paper]{article}
+
+\usepackage{psfrag}
+\usepackage[dvips]{epsfig}
+\usepackage{amsmath,amssymb}
+\usepackage{theorem}
+\usepackage{epsfig}
+\usepackage{color}
+
+\newcommand\R{{\mathbb R}}
+\renewcommand{\Re}{{\mathbb R}}
+\newcommand\N{{\mathbb N}}
+\newcommand\C{{\mathbb C}}
+\newcommand\Z{{\mathbb Z}}
+\newcommand\Q{{\mathbb Q}}
+\renewcommand\C{\mathbb{C}}
+\newcommand\I{\mathcal{I}}
+\newcommand\A{\mathcal{A}}
+\newcommand\B{\mathcal{B}}
+\newcommand\U{\mathcal{U}}
+\newcommand\V{\mathcal{V}}
+\newcommand\W{\mathcal{W}}
+\newcommand\F{\mathcal{F}}
+\newcommand\Nscr{{\mathcal{N}}}
+\newcommand\Mscr{{\mathcal{M}}}
+\newcommand{\qed}{\begin{flushright}$\blacksquare$\end{flushright}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proof}{Proof}
+\newtheorem{proposition}{Proposition}
+\newtheorem{acknowledgement}{Acknowledgement}
+\newtheorem{algorithm}{Algorithm}
+\newtheorem{axiom}{Axiom}
+\newtheorem{case}{Case}
+\newtheorem{claim}{Claim}
+\newtheorem{conclusion}{Conclusion}
+\newtheorem{condition}{Condition}
+\newtheorem{criterion}{Criterion}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{exercise}{Exercise}
+\newtheorem{notation}{Notation}
+\newtheorem{problem}{Problem}
+\newtheorem{remark}{Remark}
+\newtheorem{solution}{Solution}
+\newtheorem{summary}{Summary}
+\numberwithin{equation}{section}
+
+\newcommand{\bmat}{\left[ \begin{array}}
+\newcommand{\emat}{\end{array} \right]}
+\newcommand{\spnop}{\mathop{\rm span}}
+\renewcommand{\bmat}{\left[ \begin{array}}
+\renewcommand{\emat}{\end{array} \right]}
+
+\headheight 8mm
+\headsep 16mm
+\topmargin  -20mm
+\oddsidemargin -.15in
+\textwidth 160mm
+\textheight 240mm
+\baselineskip 7mm
+\parindent 0mm
+
+\newcommand{\domain}{{\mbox{\em domain}}}
+\renewcommand{\dim}{{\mbox{\em dim}}}
+\newcommand{\range}{{\mbox{\sc Range}}}
+\renewcommand{\null}{{\mbox{\sc Null}}}
+\newcommand{\nullity}{{\mbox{\sc Nullity}}}
+\newcommand{\rank}{{\mbox{\sc Rank}}}
+\newcommand{\spn}{{\mbox{\sc Span}}}
+
+\newcommand{\ifpart}{\textbf{(if) }}
+\newcommand{\onlyifpart}{\textbf{(only if) }}
+\renewcommand{\solution}{\noindent{\it Solution.} }
+
+\begin{document}
+\thispagestyle{plain}
+
+\vspace*{-1.5cm}{\noindent \rule{15.8cm}{.3mm} \\[.3cm]}
+\begin{center} \bf
+{\large Linear System Theory \medskip \\
+Problem Set 1 \\
+Linear Spaces, Linear Maps, and Representations\medskip \\
+Issue date: September 19, 2019 \\ Due date: October 7, 2019}
+\end{center}
+\rule{15.8cm}{.3mm} \\[0cm]
+
+\noindent{\bf Exercise 1. (Linear spaces {\bf$[40\, \text{points}]$})}
+\begin{enumerate}
+	\item {\bf$[18\, \text{points}]$}
+	Let $S$ be a set, and $F = \{f: S\rightarrow \R_+ \}$ be the space of functions from $S$ to
+	the (strictly) positive reals. Let the operations $\oplus:F\times F \rightarrow F,\ \odot:\R\times F\rightarrow F$ be defined as
+	follows:
+	\begin{align*}
+	[f_1 \oplus f_2] (x) &= f_1(x)f_2(x) \quad\quad \forall f_1,f_2 \in F, \forall x\in S \\
+	[\alpha \odot f] (x) &= f(x)^\alpha \quad\quad \forall \alpha\in\mathbb{R}, \forall f \in F, \forall x\in S 
+	\end{align*}
+	\begin{itemize}
+		\item Show that $(F, \R, \oplus,\odot)$ is a linear space. 
+		\item Identify the zero-vector.
+	\end{itemize}
+	
+	\item {\bf$[12\, \text{points}]$}
+	Let $S=\{a,b\}$, and let
+	\begin{align*}
+	&f_1(a) = 2,\ f_1(b) = 1 \\
+	&f_2(a) = 1,\ f_2(b) = 3 \\ 
+	&f_3(a) = 4,\ f_3(b) = 1 
+	\end{align*}
+	Show that $\{f_1, f_2\}$ are linearly independent and that $\{f_1, f_3\}$ are linearly dependent.
+	
+	\item {\bf$[10\, \text{points}]$}
+	Let $\varphi:F\rightarrow F$ be defined as follows:
+	\begin{align*}
+	[\varphi(f)] (x) = \sqrt{f(x)} &\quad\quad \forall f\in F, \forall x\in S 
+	\end{align*}
+	Show that $\varphi$ is a linear map over the space $F$ on $(F, \mathbb{R}, \oplus, \odot)$.
+	
+\end{enumerate}
+
+\clearpage
+
+\noindent {\textbf {Solution 1.1}}
+\begin{itemize}
+	\item \textbf{vector addition}
+	\begin{itemize}
+		\item \textbf{associative}: \\
+		$\forall f_1, f_2, f_3 \in F, f_1 \oplus (f_2 \oplus f_3) = f_1 \oplus (f_2 f_3) = f_1 (f_2 f_3) = f_1 f_2 f_3 = (f_1 f_2) f_3 = (f_1 \oplus f_2 ) \oplus f_3$
+		\item \textbf{commutative}: \\
+		$\forall f_1, f_2 \in F, f_1 \oplus f_2 = f_1 f_2 = f_2 f_1 = f_2 \oplus f_1$
+		\item \textbf{identity}: \\
+		Define $f_0(x) = 1, \forall x \in S$. $F = \{f: S\rightarrow \R_+ \} \Rightarrow f_0 \in F$. \\
+		$\forall f \in F, f \oplus f_0 = f \cdot 1 = f$.
+		\item \textbf{inverse}: \\
+		$\forall f \in F, f(x) \in \R_+, f(x) > 0, \frac{1}{f} > 0, \frac{1}{f} \in F, f \oplus \frac{1}{f} = f(x) \cdot \frac{1}{f(x)} = 1$
+	\end{itemize}
+	\item \bf{scalar multiplication}
+	\begin{itemize}
+		\item associative: \\
+		$\forall a, b \in \R, \forall f \in F, a \odot (b \odot f) = a \odot f^b = (f^b)^a = f^{ab} = (a \cdot b) \odot f$
+		\item identity: \\
+		$\forall f \in F, 1 \odot f = f^1 = f$
+	\end{itemize}
+	\item \bf{distributive scalar multiplication}
+	\begin{itemize}
+		\item $\forall a, b \in \R, \forall f \in F, (a + b) \odot f = f^{a+b} = f^a f^b = (f^a) (f^b) = (a \odot f) \oplus (b \odot f)$
+		\item $\forall a \in \R, \forall f_1, f_2 \in F, a \odot (f_1 \oplus f_2) = a \odot (f_1 f_2) = \left(f_1 f_2\right)^a = f_1^a f_2^a = (a \odot f_1) \oplus (a \odot f_2)$
+	\end{itemize}
+\end{itemize}
+Therefore, $(F, \R, \oplus,\odot)$ is a linear space and the zero-vector is $1$. \\
+
+\noindent {\bf Solution 1.2}
+
+\begin{itemize}
+	\item $\{f_1,f_2\}$ \\
+	For the sake of contradiction, we assume $\{f_1,f_2\}$ are linearly dependent so that \\
+	$\exists c_1 ,c_2 \in \R \text{ which are not both 0 such that} \left( c_1 \odot f_1(x) \right) \oplus \left( c_2 \odot f_2(x) \right) = 1$ \\
+	$x = a$: $\left( c_1 \odot 2 \right) \oplus \left( c_2 \odot 1 \right) = 1 \Rightarrow 2^{c_1} \cdot 1^{c_2} = 2^{c_1} = 1 \Rightarrow c_1 = 0$ \\
+	$x = b$: $\left( 0 \odot 1 \right) \oplus \left( c_2 \odot 3 \right) = 1 \Rightarrow 2^{0} \cdot 3^{c_2} = 3^{c_2} = 1 \Rightarrow c_2 = 0$ \\
+	$c_1 = c_2 = 0 \text{ contradict our assumption} \Rightarrow \{f_1, f_2\} \text{ must be linearly independent.}$ 	
+	\item $\{f_1,f_3\}$ \\
+	$\{f_1,f_3\}$ are linearly dependent, if we can find $c_1 ,c_2 \in \R$ that are not both $0$ such that \\
+	$\left( c_1 \odot f_1(x) \right) \oplus \left( c_2 \odot f_3(x) \right) = 1$ \\
+	$x = a$: $\left( c_1 \odot 2 \right) \oplus \left( c_2 \odot 4 \right) = 1 \Rightarrow 2^{c_1} \cdot 4^{c_2} = 2^{c_1 + 2 c_2} = 1$ \\
+	$x = b$: $\left( c_1 \odot 1 \right) \oplus \left( c_2 \odot 1 \right) = 1 \Rightarrow 1^{c_1} \cdot 1^{c_2} = 1^{c_1 + c_2} = 1$ \\
+	$1^{c_1 + c_2} = 1$ implies $c_1, c_2$ can be any real number. We can choose $c_1 = 2, c_2 = -1$ to satisfy the two conditions above. Therefore, $\{f_1,f_3\}$ are linearly dependent.
+\end{itemize}
+
+\noindent {\bf Solution 1.3} \\
+
+$\forall a_1, a_2 \in \R, \forall f_1, f_2 \in F, \varphi\left((a_1 \odot f_1) \oplus (a_2 \odot f_2) \right) = \varphi({f_1}^{a_1}{f_2}^{a_2}) = \sqrt{{f_1}^{a_1}{f_2}^{a_2}} = \sqrt{{f_1}^{a_1}}\sqrt{{f_2}^{a_2}} = {\sqrt{f_1}}^{a_1}{\sqrt{f_2}}^{a_2} = \left(a_1 \odot \sqrt{f_1}\right)\left(a_2 \odot \sqrt{f_2}\right) = \left(a_1 \odot \varphi(f_1)\right)\left(a_2 \odot \varphi{f_2} \right)= \left(a_1 \odot \varphi(f_1)\right) \oplus \left(a_2 \odot \varphi(f_2)\right)$ \\
+Therefore, $\varphi$ is a linear map over the space $F$ on $(F, \mathbb{R}, \oplus, \odot)$.
+
+\clearpage
+
+\noindent{\bf Exercise 2. (Range and null space {\bf$[40\, \text{points}]$})}\\
+Let $(F, +, \cdot)$ be a field and consider the linear maps $\mathcal{A} : (F^n, F) \rightarrow (F^m, F)$ and  $\mathcal{B} : (F^m, F) \rightarrow (F^p, F)$. Show, without using the matrix representation of linear maps, that:
+
+\begin{enumerate}
+	\item {\bf$[10\, \text{points}]$} $0 \leq \dim(\range(\mathcal{A})) \leq \min\{m, n\}$.
+	\item {\bf$[15\, \text{points}]$} $\dim(\range(\mathcal{A})) + \dim(\range(\mathcal{B})) - m \leq \dim(\range(\mathcal{B}\circ\mathcal{A}))$
+	\item {\bf$[15\, \text{points}]$} $\dim(\range(\mathcal{B}\circ\mathcal{A})) \leq \min\{\dim(\range(\mathcal{A})),\dim(\range(\mathcal{B}))\}$. 
+\end{enumerate}
+
+
+\noindent {\bf Solution 2.1} \\
+The first inequality is trivial since the number of vectors of a basis should definitely non-negative, i.e., $0 \leq \dim(\range(\mathcal{A}))$. For the second inequality, we first prove a lemma.
+\begin{lemma}
+	If $(V,F)$ has dimension $n$ then any set of $n+1$ or more vectors is linearly dependent.
+\end{lemma}
+\begin{proof}
+	For the sake of contradiction, we assume that there exists a set of $n+k\left(k>0, k \in \N\right)$ linearly independent vectors $\{v_1, \dots,v_{n+k}\}$, then $\dim(span(\{v_1, \dots,v_{n+k}\}))=n+k$. \\
+	Since $\{v_1, \dots,v_{n+k}\} \subseteq (V,F)$, $span(\{v_1, \dots,v_{n+k}\}) \subseteq (V,F)$, \\
+	$n+k = \dim(span(\{v_1, \dots,v_{n+k}\})) \leq \dim((V,F)) = n$, which leads to contradiction.
+\end{proof}
+Next, we prove $\dim(\range(\A)) \leq m$. For the sake of contradiction, assume $\dim(\range(\A)) = p > m$, \\
+and a basis of $\range(\A)$ is $\{v_1,\dots,v_p\}$, which are linearly independent. \\
+The fact that linearly independent vectors $\{v_1,\dots,v_p\} \subseteq \range(\A) \subseteq (V,F)$ and the dimension of $(V,F)$ is $m<p$ contradict the lemma. Therefore $\range(\A) \leq m$. \\
+Finally, we prove $\dim(\range(\A)) \leq n$. $\forall v \in V, \exists u \in U, \A(u)=v$. Let $\{e_1,\dots,e_n\}$ be a basis of $U$. \\
+$\forall u \in U, \exists a_1, \dots, a_n, u = a_1 e_1 + \cdots + a_n e_n$, where $a_i$ are not all $0$. \\
+Therefore, $\forall v \in V, v = \A (u) = \A \left(a_1 e_1 + \cdots + a_n e_n\right) = a_1 \A(e_1) + \cdots + a_n \A(e_n)$. If $\{\A(e_1), \dots, \A(e_n)\}$ are linearly independent, then $\dim(\range(\A)) = n$, otherwise $\dim(\range(\A)) < n$. \\
+$\begin{cases}
+\dim(\range(\A)) \leq n \\
+\dim(\range(\A)) \leq m
+\end{cases} \Rightarrow$ $\dim(\range(\A)) \leq \min \{m,n\}$, which completes the proof. \\
+\ \\
+
+\noindent {\bf Solution 2.2}
+\begin{align*}
+&\range (\A) \cap \null (\B) \subseteq \null (\B) \\
+\Leftrightarrow& \dim \left( \range (\A) \cap \null (\B) \right) \leq \dim (\null(\B))\\
+\Leftrightarrow& \dim \left( \range (\A) \cap \null (\B) \right) \leq \dim (\null(\B)) + \dim (\null(\A)) \\
+\Leftrightarrow& \dim \left( \null(\B \circ \A) \right) \leq \dim (\null(\B)) + \dim (\null(\A)) \\
+\Leftrightarrow& n - \dim \left( \range(\B \circ \A) \right) \leq m - \dim (\range(\B)) + n - \dim (\range(\A)) \\
+\Leftrightarrow& \dim (\range(\A)) + \dim (\range(\B)) - m \leq \dim \left( \range(\B \circ \A) \right)
+\end{align*}
+
+\noindent {\bf Solution 2.3} \\
+
+$\range(\A) \in F^m \Rightarrow \range(\B \circ \A) \subseteq \range(\B) \Rightarrow \dim(\range(\B \circ \A)) \leq \dim(\range(\B))$ \\
+Let $\{v_1, \dots, v_r\}$ be a set of basis of $\range(\A)$. \\
+$\range(\B \circ \A) = \{l \in F^p | \exists w \in \range(\A), \B (w) = l\}$. \\
+Since $\range(\A) = span (\{v_1, \dots, v_r\})$, $\forall w \in \range(\A), \exists c_1, \dots, c_r \in F, w = c_1 v_1 + \cdots + c_r v_r$. \\
+Due to the linear map $\B$, $\B (w) = c_1 \B (v_1) + \cdots + c_r \B (v_r)$. \\
+$\forall l \in F^p, \exists w \in \range(\A), \exists c_1, \dots, c_r, l=\B(w)=\B(c_1 v_1 + \cdots + c_r v_r) = c_1 \B(v_1) + \cdots + c_r \B(v_r)$. \\
+If $\{\B(v_1),\dots,\B(v_r)\}$ are linearly independent, $\dim(\range(\B \circ \A)) = r = \dim(\range(\A))$, \\
+otherwise $\dim(\range(\B \circ \A)) < r = \dim(\range(\A))$. \\
+$\begin{cases}
+\dim(\range(\B \circ \A)) \leq \dim(\range(\A)) \\
+\dim(\range(\B \circ \A)) \leq \dim(\range(\B))
+\end{cases} \Rightarrow \dim(\range(\B \circ \A)) \leq \min \{\dim(\range(\A)),\dim(\range(\B))\}$
+
+\clearpage
+
+\noindent{\bf Exercise 3. (Linear maps and matrix representations {\bf$[20\, \text{points}]$})}\\
+Consider a linear map $\A:(U,F) \rightarrow (U,F)$
+where $U$ has finite dimension $n$. 
+\begin{enumerate}
+	\item {\bf$[10\, \text{points}]$} Assume there exists a basis
+	$\nu_i$, $i=1, \ldots, n$ for $U$ such that ${\mathcal A}(\nu_n)=\lambda
+	\nu_n$ and ${\mathcal A}(\nu_i)=\lambda \nu_i+\nu_{i+1}$, $i=1, \ldots,
+	n-1$. Derive the representation of ${\mathcal A}$ with respect to this~basis.
+	\item {\bf$[10\, \text{points}]$} Assume there exists a vector $b
+	\in U$ such that the set $\{b, {\mathcal A}(b), {\mathcal
+		A}\circ {\mathcal A}(b), \ldots, {\mathcal A}^{n-1}(b)\}$ is linearly independent. Derive the representation of ${\mathcal A}$
+	with respect to this basis.\\
+\end{enumerate}
+
+{\bf Solution 3.1} \\
+
+$a_{ij} = \begin{cases}
+\lambda & i = j \\
+1 & j = i + 1 \\
+0 & otherwise
+\end{cases} \Rightarrow A = \left[\begin{matrix}
+\lambda & 1 & & & \\
+& \lambda &1 & & \\
+& & \ddots &\ddots & \\
+& & & \lambda & 1 \\
+& & & & \lambda
+\end{matrix}\right]$ \\
+
+{\bf Solution 3.2} \\
+
+$\A:(U,F) \rightarrow (U,F) \Rightarrow \A^n(b) \in U$. \\
+Since the set $\{b, {\A}(b), {\A} \circ {\A}(b), \ldots, {\A}^{n-1}(b)\}$ is linearly independent and $\dim(U) = n$, \\
+$\exists c_1,\dots,c_n \in F$, which are not all zero, such that $\A^n(b) = c_1b + \cdots + c_n\A^{n-1}(b)$. \\
+
+$a_{ij} = \begin{cases}
+1 & j = i + 1 \\
+c_j & i = n \\
+0 & otherwise
+\end{cases} \Rightarrow A = \left[\begin{matrix}
+ & 1 & & & \\
+&  &1 & & \\
+& &  &\ddots & \\
+& & &  & 1 \\
+c_1 & & \cdots & & c_n
+\end{matrix}\right]$
+
+\end{document}
