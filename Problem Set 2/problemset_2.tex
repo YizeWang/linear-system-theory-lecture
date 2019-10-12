@@ -1,4 +1,4 @@
-\documentclass[fleqn,12pt, a4paper]{article}
+\documentclass[fleqn, 10.5pt, a4paper]{article}
 
 \usepackage{psfrag}
 \usepackage[dvips]{epsfig}
@@ -90,6 +90,10 @@
 \def\onlyifpart{\textbf{(only if) }}
 \def\solution{\noindent{\it Solution.} }
 
+\newcommand{\dx}{\, \mathrm{d} x}
+\newcommand{\supx}{\sup_{x\neq0}}
+
+
 \begin{document}
 \thispagestyle{plain}
 
@@ -145,12 +149,87 @@ for $n\in\N$. Compute the 1-norm, 2-norm and $\infty$-norm of the functions for 
 \left\lVert f \right\rVert_\infty := \max\limits_{t \in [0, 1]} |f(t)|.
 \end{displaymath}
 Based on your computations, what can you say about equivalence of these norms?  
-
-
 \end{enumerate} 
 
+\noindent \textbf {Solution 1.1} \\
+\begin{itemize}
+	\item $\forall f, g \in C([t_0, t_1], \R^n), \|f+g\|_\infty \leq \|f\|_\infty + \|g\|_\infty$
+	\begin{align*}
+		\forall f, g \in C([t_0, t_1], \R^n), \|f+g\|_\infty &= \max_{t \in [t_0, t_1]} \| f + g\|_p \\
+		&\leq  \max_{t \in [t_0, t_1]} \{\| f \|_p + \|g\|_p\} \\
+		&\leq \max_{t \in [t_0, t_1]} \| f \|_p + \max_{t \in [t_0, t_1]} \|g\|_p \\
+		&= \|f\|_\infty + \|g\|_\infty
+	\end{align*}
+	\item $\forall f \in C([t_0, t_1], \R^n), \forall a \in \R, \|af\| = a\|f\|$
+	\begin{align*}
+		\forall f \in C([t_0, t_1], \R^n), \forall a \in \R, \|af\| &= \max_{t \in [t_0, t_1]} \| af \|_p \\
+		&= \max_{t \in [t_0, t_1]} a \| f \|_p \\
+		&= a \max_{t \in [t_0, t_1]} \| f \|_p \\
+		&= a\| f \|_\infty \\
+	\end{align*}
+	\item $\|f\|=0 \Leftrightarrow f = 0$ \\
+	$\Rightarrow: \|f\|=0\Rightarrow\max_{t \in [t_0, t_1]} \| f \|_p = 0$, $\|f\|_p \geq 0 \Rightarrow \|f\|_p = 0, \forall t \in [t_0, t_1] \Rightarrow f = 0$ \\
+	$\Leftarrow: f = 0 \Rightarrow \|f\|_p = 0, \forall t \in [t_0, t_1] \Rightarrow \max_{t \in [t_0, t_1]} \| f \|_p = 0 \Rightarrow \|f\|=0$
+\end{itemize}
+
+\noindent \textbf {Solution 1.2} \\
+Define $x_{max}$ and $\left(Ax\right)_{max}$ to simplify further notation:
+\begin{align*}
+	x_{max} &= \max_{i\in\{1,\dots,n\}} x_i \\
+	\left(Ax\right)_{max} &= \max_{j\in\{1,\dots,m\}}\left(Ax\right)_j
+\end{align*}
+Then, start with $\|A\|_2^2$:
+\begin{align*}
+\|A\|_2^2&=\left(\supx\frac{\|Ax\|_2}{\|x\|_2}\right)^2=\supx\frac{\|Ax\|_2^2}{\|x\|_2^2} = \supx \frac{\sum_{i=1}^{m} \left(Ax\right)_i^2}{\sum_{i=1}^{n} x_i^2} \geq \supx \frac{\sum_{i=1}^{m} \left(Ax\right)_i^2}{\sum_{i=1}^{n} x_{max}^2} \\
+&=\supx \frac{1}{n}\frac{\sum_{i=1}^{m} \left(Ax\right)_i^2}{x_{max}^2} \geq \supx \frac{1}{n}\frac{\left(Ax\right)_{max}^2}{x_{max}^2} = \supx \frac{1}{n} \left(\frac{\left(Ax\right)_{max}}{x_{max}}\right)^2 \\
+&= \frac{1}{n}  \left(\supx\frac{\left(Ax\right)_{max}}{x_{max}}\right)^2 =\frac{1}{n} \left(\supx \frac{\|Ax\|_\infty}{\|x\|_\infty}\right)^2= \frac{1}{n}\|Ax\|_\infty \\
+&\Rightarrow \|A\|_2 \geq \frac{1}{\sqrt{n}}\|Ax\|_\infty
+\end{align*}
+\begin{align*}
+\|A\|_2^2&=\left(\supx\frac{\|Ax\|_2}{\|x\|_2}\right)^2=\supx\frac{\|Ax\|_2^2}{\|x\|_2^2} = \supx \frac{\sum_{i=1}^{m} \left(Ax\right)_{i}^2}{\sum_{i=1}^{n} x_i^2} \leq \supx \frac{\sum_{i=1}^{m} \left(Ax\right)_{max}^2}{\sum_{i=1}^{n} x_{i}^2} \\&= \supx \frac{m \left(Ax\right)_{max}^2}{\sum_{i=1}^{n} x_{i}^2} = m\supx \frac{\left(Ax\right)_{max}^2}{\sum_{i=1}^{n} x_{i}^2} \leq m\supx \frac{\left(Ax\right)_{max}^2}{x_{max}^2} = m\supx \left(\frac{\left(Ax\right)_{max}}{x_{max}}\right)^2 \\
+&=m\left(\supx \frac{\left(Ax\right)_{max}}{x_{max}}\right)^2 = m\left(\supx \frac{\|Ax\|_\infty}{\|x\|_\infty}\right)^2 = m\|Ax\|_\infty \\
+&\Rightarrow \|A\|_2 \leq \sqrt{m}\|Ax\|_\infty
+\end{align*}
+
+\noindent \textbf {Solution 1.3} \\
+Although $n\in\N$ can be any non-negative integer, we additionally require $n>0$ to make sure the piece-wise function $f_0(x)$ is well defined, otherwise $\frac{1}{0}$ does not make sense.
+\begin{align*}
+\forall x \in \left[0,\frac{1}{n}\right], \forall n \in \N, n - n^2 x \geq 0 \Rightarrow f_n (x) \geq 0, \forall x \in [0,1] \Rightarrow \lvert f_n(x) \rvert = f_n(x), \forall x \in [0,1] \\
+\end{align*}
+
+\begin{itemize}
+\item $\|f\|_1$
+\begin{align*}
+	\|f\|_1 = \int_0^1 \lvert f_n(x)\rvert \dx=\int_0^1f_n(x)\dx = \int_0^{\frac{1}{n}}\left(n-n^2x\right) \dx = nx-\frac{1}{2}n^2x^2 \bigg\rvert_0^{\frac{1}{n}} = \frac{1}{2}
+\end{align*}
+\item $\|f\|_2$
+\begin{align*}
+\|f\|_2^2&=\int_0^1 \lvert f_n(x)\rvert ^2 \dx = \int_0^{\frac{1}{n}}\left(n-n^2x\right)^2\dx \\
+&=\int_0^{\frac{1}{n}}\left(n^4x^2-2n^3x+n^2\right) \dx = \frac{1}{3}n^4x^3-n^3 x^2 + n^2 x \bigg\rvert_0^{\frac{1}{n}}=\frac{1}{3}n \\
+\|f\|_2 &= \sqrt{\frac{1}{3}n}
+\end{align*}
+\item $\|f\|_\infty$
+\begin{align*}
+\|f\|_\infty = \max_{t \in [0,1]} \lvert f_n(t) \rvert = \max_{t\in \left[0,1/n\right]} n-n^2t=n
+\end{align*}
+\item Equivalence of $\|f_n\|_1$ and $\|f_n\|_\infty$
+\begin{align*}
+\exists m_u = 4n \geq m_l = n \geq 0, \forall f_n \in C([0,1], \R), m_l\|f_n\|_1 = \frac{1}{2}n \leq n = \|f_n\|_\infty \leq 2n = m_u\|f_n\|_1
+\end{align*}
+\item Equivalence of $\|f_n\|_2$ and $\|f_n\|_\infty$
+\begin{align*}
+\exists m_u = \sqrt{27n} \geq m_l = \sqrt{\frac{1}{3}n} \geq 0, \forall f_n \in C([0,1], \R), m_l\|f_n\|_2 = \frac{1}{3}n \leq n = \|f_n\|_\infty \leq 3n = m_u\|f_n\|_2
+\end{align*}
+Therefore,  $\|f_n\|_1$, $\|f_n\|_2$ and $\|f_n\|_\infty$ are equivalent.
+\end{itemize}
+
+
+
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\bigskip
 \clearpage
 %2017, 2
 {\bf Exercise 2. (Banach fixed point theorem  {\bf$[25\, \text{points in total}]$})}
