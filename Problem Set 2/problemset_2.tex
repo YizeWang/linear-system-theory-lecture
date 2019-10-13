@@ -92,7 +92,7 @@
 
 \newcommand{\dx}{\, \mathrm{d} x}
 \newcommand{\supx}{\sup_{x\neq0}}
-
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 
 \begin{document}
 \thispagestyle{plain}
@@ -243,8 +243,7 @@ Therefore,  $\|f_n\|_1$, $\|f_n\|_2$ and $\|f_n\|_\infty$ are equivalent.
 \end{displaymath}
 Show that there exists a unique point $\bar{x}$ such that $f(\bar{x}) = \bar{x}$.
 
-\noindent
-{\em Hint:} 
+\noindent {\em Hint:} 
 Given an arbitrary initial point $x$,
 consider the sequence of iterates 
 $f^{[n]}(x) = f(f^{[n-1]}(x))$, where the first iterate is given by $f^{[0]}(x)=x$. You can start by showing that this sequence is Cauchy.
@@ -252,6 +251,63 @@ $f^{[n]}(x) = f(f^{[n-1]}(x))$, where the first iterate is given by $f^{[0]}(x)=
 \item {\bf$[5\, \text{points}]$} Now assume $f$ is a linear map. Given the condition in the first part of Exercise 2, what can you conclude about the induced norm of $f$?
 
 \end{enumerate}
+
+\noindent \textbf {Solution 2.1} \\
+\begin{align*}
+	f^{[0]}(x) &= x \\
+	f^{[1]}(x) &= f\left(f^{[0]}(x)\right) = f(x) \\
+	f^{[2]}(x) &= f\left(f^{[1]}(x)\right) = f(f(x)) \\
+			   & \;\; \vdots \\
+	f^{[n]}(x) &= f\left(f^{[n-1]}(x)\right) = f(\cdots f(f(x)))		  
+\end{align*}
+$\forall p\geq q\geq 0, p,q\in N:$
+\begin{align*}
+	\|f^{[p]}(x)-f^{[q]}(x)\| &= \norm{f\left(f^{[p-1]}(x)\right)-f\left(f^{[q-1]}(x)\right)} \\
+	&\leq \alpha \norm{f^{[p-1]}(x)-f^{[q-1]}(x)} \\
+	& \; \; \vdots \\
+	&\leq \alpha^{q} \norm{f^{[p-q]}(x)-f^{[0]}(x)} \\
+	&= \alpha^q \norm{f^{[p-q]}(x)-x}
+\end{align*}
+$\forall k \in N:$
+\begin{align*}
+	\norm{f^{[k]}(x)-x} &= \norm{f^{[k]}(x)-f(x)+f(x)-x} \\
+	&\leq \norm{f^{[k]}(x)-f(x)}+\norm{f(x)-x} \\
+	&\leq \alpha\norm{f^{[k-1]}(x)-x}+\norm{f(x)-x} \\
+	&\leq \alpha^2\norm{f^{[k-2]}(x)-x}+\left(1+\alpha\right)\norm{f(x)-x} \\
+	& \;\; \vdots \\
+	&\leq \alpha^{k-1}\norm{f^{[1]}(x)-x} + \left(1+\alpha+\cdots+\alpha^{k-2}\right)\norm{f(x)-x} \\
+	&\leq \left(1+\alpha+\cdots+\alpha^{k-2}+\alpha^{k-1}\right)\norm{f(x)-x} \\
+	&=\frac{1-\alpha^k}{1-\alpha}\norm{f(x)-x}
+\end{align*}
+$\forall \epsilon>0,\exists N = \bigg\lceil \log_\alpha\left(\frac{\epsilon(1-\alpha)}{\norm{f(x)-x}}+\alpha^m\right) \bigg\rceil \in \N \ (\lceil t \rceil \text{ means the smallest integer greater than } t),\forall m \geq N,$
+\begin{align*}
+\norm{f^{[m]}(x)-f^{[N]}(x)} 
+&\leq \alpha^N \norm{f^{[m-N]}(x)-x} \\
+&\leq \alpha^N \cdot \frac{1-\alpha^{m-N}}{1-\alpha} \cdot \norm{f(x)-x} \\
+&= \frac{\alpha^N-\alpha^{m}}{1-\alpha} \norm{f(x)-x} \\
+N&>\log_\alpha\left(\frac{\epsilon(1-\alpha)}{\norm{f(x)-x}}+\alpha^m\right) \\
+\Rightarrow \norm{f^{[m]}(x)-f^{[N]}(x)} &< \epsilon
+\end{align*}
+Therefore, $\{f^{[i]}\}_{i=0}^{\infty}$ is a Cauchy sequence.
+Note that given an arbitrary initial point $x$, we can compute the value of $\|f(x)-x\|$ so we treat $\|f(x)-x\|$ as a known constant in the proof above. Because $\left(X, \left\lVert\cdot\right\rVert\right)$ is a Banach space, $\{f^{[i]}\}_{i=0}^{\infty}$ converges to a point $f^*$.
+\begin{align*}
+	f^* &=\lim_{n\to\infty}f^{[n]}(x) = \lim_{n\to\infty}f\left(f^{[n-1]}(x)\right) = f\left(\lim_{n\to\infty}f^{[n-1]}(x)\right) = f(f^*) 
+\end{align*}
+Therefore, there exist $\bar{x}=f^*$ such that $f(\bar{x}) = \bar{x}$. Next, we prove uniqueness: For the sake of contradiction, assume there exist $\bar{x}_1,\bar{x}_2 \in X, \bar{x}_1 \neq \bar{x}_2$ such that $f(\bar{x}_1)=\bar{x}_1$ and $f(\bar{x}_2)=\bar{x}_2$.
+\begin{align*}
+	\norm{f(\bar{x}_2)-f(\bar{x}_1)} =\norm{\bar{x}_2-\bar{x}_1} \leq \alpha\norm{\bar{x}_2-\bar{x}_1}	
+\end{align*}
+Since $\alpha \in [0,1)$, $\alpha \neq 1$. The above inequality never holds, which leads to contradiction, so $\bar{x}$ is unique.
+\noindent \textbf {Solution 2.2} \\
+Let $F$ be the representation of linear map $f(\cdot)$. $\forall x,y \in X$:
+\begin{align*}
+\norm{f(x)-f(y)} = \norm{Fx-Fy} = \norm{F(x-y)} \leq \alpha \norm{x-y} \Rightarrow \frac{\norm{F(x-y)}}{\norm{x-y}} &\leq \alpha
+\end{align*}
+$\forall u \in X, \exists x,y \in X$ such that $u = x-y$.
+\begin{align*}
+\norm{F} = \sup_{u\neq 0}\frac{\norm{Fu}}{\norm{u}} \leq \sup_{u\neq 0} \alpha = \alpha
+\end{align*}
+Therefore, the induced norm of $f$ is bounded by $\alpha$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bigskip
