@@ -1,130 +1,71 @@
-\documentclass[fleqn, 10.5pt, a4paper]{article}
-
-\usepackage{psfrag}
-\usepackage[dvips]{epsfig}
-\usepackage{amsmath,amssymb}
-\usepackage{theorem}
-\usepackage{epsfig}
-\usepackage{color}
-\usepackage{multicol}
-\usepackage{mathtools}
-
-\def\R{{\mathbb R}}
-\renewcommand{\Re}{{\mathbb R}}
-\def\N{{\mathbb N}}
-\def\C{{\mathbb C}}
-\def\Z{{\mathbb Z}}
-\def\Q{{\mathbb Q}}
-\def\C{\mathbb{C}}
-
-
-\def\I{\mathcal{I}}
-\def\A{\mathcal{A}}
-\def\B{\mathcal{B}}
-\def\U{\mathcal{U}}
-\def\V{\mathcal{V}}
-\def\W{\mathcal{W}}
-\def\F{\mathcal{F}}
-\def\Nscr{{\mathcal{N}}}
-\def\Mscr{{\mathcal{M}}}
-
-%------------------------------------------------------------
-% Theorem like environments
-%
-\newtheorem{theorem}{Theorem}
-\newtheorem{corollary}{Corollary}
-\newtheorem{lemma}{Lemma}
-\newtheorem{proposition}{Proposition}
-%\theoremstyle{plain}
-\newtheorem{acknowledgement}{Acknowledgement}
-\newtheorem{algorithm}{Algorithm}
-\newtheorem{axiom}{Axiom}
-\newtheorem{case}{Case}
-\newtheorem{claim}{Claim}
-\newtheorem{conclusion}{Conclusion}
-\newtheorem{condition}{Condition}
-\newtheorem{criterion}{Criterion}
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}
-\newtheorem{example}{Example}
-\newtheorem{exercise}{Exercise}
-\newtheorem{notation}{Notation}
-\newtheorem{problem}{Problem}
-\newtheorem{remark}{Remark}
-\newtheorem{solution}{Solution}
-\newtheorem{summary}{Summary}
-\numberwithin{equation}{section}
-%--------------------------------------------------------
-
-
-\newcommand{\spanop}{\mathop{\rm span}}
-\newenvironment{mymat}{\left[\begin{matrix}}{\end{matrix}\right]}
-
-\headheight 8mm
+% style settings
+\documentclass[a4paper,10.5pt]{article}
 \headsep 16mm
-\topmargin  -20mm
-\oddsidemargin -.15in
+\parindent 0mm
+\headheight 8mm
+\topmargin -20mm
 \textwidth 160mm
 \textheight 240mm
 \baselineskip 7mm
-\parindent 0mm
-%\pagestyle{headings}
-%\markright{EIST: Paper 3 Examples Paper 1 }
+\oddsidemargin -.15in
 
-\def\domain{{\mbox{\em domain}}}
+% import packages
+\usepackage{color}
+\usepackage{epsfig}
+\usepackage{psfrag}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{theorem}
+\usepackage{multicol}
+\usepackage{mathtools}
+
+% define shortcuts
 \def\dim{{\mbox{\em dim}}}
-\def\range{{\mbox{\sc Range}}}
-\def\null{{\mbox{\sc Null}}}
-\def\nullity{{\mbox{\sc Nullity}}}
-\def\rank{{\mbox{\sc Rank}}}
-
-%\def\nulls{\mbox{\sc Null}}
-%def\range{\mbox{\sc Range}}
-%\newcommand{\spn}{\mbox{\sc Span}}
-%\def\rank{\mbox{\sc Rank}
-
-
-
 \def\ifpart{\textbf{(if) }}
+\def\rank{{\mbox{\sc Rank}}}
+\def\null{{\mbox{\sc Null}}}
+\def\range{{\mbox{\sc Range}}}
+\def\domain{{\mbox{\em domain}}}
+\def\nullity{{\mbox{\sc Nullity}}}
 \def\onlyifpart{\textbf{(only if) }}
-\def\solution{\noindent{\it Solution.} }
+\def\solution{\noindent{\it Solution.}}
 
+% define new commands and environment
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
 \newcommand{\defeq}{\vcentcolon=}
-\newcommand{\abs}[1]{\left|#1\right|}
 \newcommand{\dt}{\, \mathrm{d} t}
 \newcommand{\dx}{\, \mathrm{d} x}
 \newcommand{\supx}{\sup_{x\neq0}}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\spanop}{\mathop{\rm span}}
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newenvironment{mymat}{\left[\begin{matrix}}{\end{matrix}\right]}
 
 \begin{document}
 \thispagestyle{plain}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% title
 \vspace*{-1.5cm}
-{\noindent \rule{15.8cm}{.3mm} \\[.3cm]}
+\noindent \rule{15.8cm}{.3mm} \\[.3cm]
 \begin{center} \bf
-{\large Linear System Theory \medskip
-\\
+{\large Linear System Theory \medskip \\
 Problem Set 2 \\
-Normed Spaces, ODEs, and Linear Time-Varying Systems\medskip
-\\ Issue date: October 7, 2019
-\\ Due date: October 21, 2019}
+Normed Spaces, ODEs, and Linear Time-Varying Systems \medskip \\
+Issue date: October 7, 2019 \\
+Due date: October 21, 2019}
 \end{center}
-\rule{15.8cm}{.3mm} \\[0cm]
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent \rule{15.8cm}{.3mm} \\[0cm]
 
-%==========================================================================================================
-% 2016,2
-\noindent
-{\bf Exercise 1. (Norms, {\bf$[45\, \text{points in total}]$})}
-\noindent
+% exercise 1
+\noindent {\bf Exercise 1. (Norms, {\bf$[45\, \text{points in total}]$})}
 \begin{enumerate}
 \item {\bf$[15\, \text{points}]$}
 Let $C([t_0, t_1], \R^n)$ be the space of all continuous functions from $[t_0, t_1]$ to $\R^n$. Prove that for $f \, \in \, C([t_0, t_1], \R^n)$,
  $\left\lVert f \right\rVert_\infty := \max\limits_{t \in [t_0, t_1]} \|f(t)\|_p \, $ satisfies the axioms of the norm, where $\|x\|_p$ is the $p$-norm of $x \in \R^n$.
-
+ 
 \item {\bf$[10\, \text{points}]$}
-Given a matrix $A \in \R^{m \times n}$, verify that the induced matrix norms $\|A\|_2 \, ,\|A\|_\infty$ are equivalent, by showing that they satisfy the following inequalities: 
+Given a matrix $A \in \R^{m \times n}$, verify that the induced matrix norms $\|A\|_2 \, ,\|A\|_\infty$ are equivalent, by showing that they satisfy the following inequalities:
 \begin{displaymath}
 \dfrac{1}{\sqrt{n}} \|A\|_\infty \leq \|A\|_2 \leq \sqrt{m} \|A\|_\infty.
 \end{displaymath}
@@ -144,14 +85,18 @@ n -n^2x & 0\leq x\leq \frac{1}{n}\\
 0 & \text{elsewhere}
 \end{cases}
 \end{displaymath}
+
 for $n\in\N$. Compute the 1-norm, 2-norm and $\infty$-norm of the functions for each n, as defined below:
 \begin{displaymath}
 \left\lVert f \right\rVert_1 := \int_0^1 \left\lvert f(x) \right\rvert dx\, , \quad
 \left\lVert f \right\rVert_2 := \sqrt{\int_0^1 \left\lvert f(x) \right\rvert^2 dx}\, , \quad
 \left\lVert f \right\rVert_\infty := \max\limits_{t \in [0, 1]} |f(t)|.
 \end{displaymath}
+
 Based on your computations, what can you say about equivalence of these norms?  
 \end{enumerate} 
+
+\clearpage
 
 \noindent \textbf {Solution 1.1} \\
 \begin{itemize}
@@ -171,10 +116,11 @@ Based on your computations, what can you say about equivalence of these norms?
 	\end{align*}
 	\item $\|f\|=0 \Leftrightarrow f = 0$ \\
 	$\Rightarrow: \|f\|=0\Rightarrow\max_{t \in [t_0, t_1]} \| f \|_p = 0$, $\|f\|_p \geq 0 \Rightarrow \|f\|_p = 0, \forall t \in [t_0, t_1] \Rightarrow f = 0$ \\
-	$\Leftarrow: f = 0 \Rightarrow \|f\|_p = 0, \forall t \in [t_0, t_1] \Rightarrow \max_{t \in [t_0, t_1]} \| f \|_p = 0 \Rightarrow \|f\|=0$
-\end{itemize}
+	$\Leftarrow: f = 0 \Rightarrow \|f\|_p = 0, \forall t \in [t_0, t_1] \Rightarrow \max_{t \in [t_0, t_1]} \| f \|_p = 0 \Rightarrow \|f\|=0$ \\
+\end{itemize} 
 
 \noindent \textbf {Solution 1.2} \\
+
 Define $x_{max}$ and $\left(Ax\right)_{max}$ to simplify further notation:
 \begin{align*}
 	x_{max} &= \max_{i\in\{1,\dots,n\}} x_i \\
@@ -193,11 +139,14 @@ Then, start with $\|A\|_2^2$:
 &\Rightarrow \|A\|_2 \leq \sqrt{m}\|Ax\|_\infty
 \end{align*}
 
+\clearpage
+
 \noindent \textbf {Solution 1.3} \\
 \begin{align*}
 \forall x \in \left[0,\frac{1}{n}\right], \forall n \in \N, n - n^2 x \geq 0 \Rightarrow f_n (x) \geq 0, \forall x \in [0,1] \Rightarrow \lvert f_n(x) \rvert = f_n(x), \forall x \in [0,1] \\
 \end{align*}
 
+\textbf{Compute norms:}
 \begin{itemize}
 \item $\|f\|_1$
 \begin{align*}
@@ -213,26 +162,33 @@ Then, start with $\|A\|_2^2$:
 \begin{align*}
 \|f\|_\infty = \max_{t \in [0,1]} \lvert f_n(t) \rvert = \max_{t\in \left[0,1/n\right]} n-n^2t=n
 \end{align*}
-\item Equivalence of $\|f_n\|_1$ and $\|f_n\|_\infty$
-\begin{align*}
-\exists m_u = 4n \geq m_l = n \geq 0, \forall f_n \in C([0,1], \R), m_l\|f_n\|_1 = \frac{1}{2}n \leq n = \|f_n\|_\infty \leq 2n = m_u\|f_n\|_1
-\end{align*}
-\item Equivalence of $\|f_n\|_2$ and $\|f_n\|_\infty$
-\begin{align*}
-\exists m_u = \sqrt{27n} \geq m_l = \sqrt{\frac{1}{3}n} \geq 0, \forall f_n \in C([0,1], \R), m_l\|f_n\|_2 = \frac{1}{3}n \leq n = \|f_n\|_\infty \leq 3n = m_u\|f_n\|_2
-\end{align*}
-Therefore,  $\|f_n\|_1$, $\|f_n\|_2$ and $\|f_n\|_\infty$ are equivalent.
+
 \end{itemize}
 
+\textbf{Equivalence test:}
+\begin{itemize}
+\item Equivalence of $\|f_n\|_1$ and $\|f_n\|_\infty$
+\begin{align*}
+\forall m_l > 0, \exists f_n \in C([0,1], \R) \text{ and } n > \frac{1}{2m_l}, m_l\norm{f_n}_\infty = m_l \cdot n > m_l \cdot \frac{1}{2m_l} = \frac{1}{2} = \norm{f_n}_1
+\end{align*}
+Therefore, $\|f_n\|_1$ and $\|f_n\|_\infty$ are not equivalent.
+\item Equivalence of $\|f_n\|_2$ and $\|f_n\|_\infty$
+\begin{align*}
+\forall m_l > 0, \exists f_n \in C([0,1], \R) \text{ and } n > \frac{1}{3m_l^2}, m_l\norm{f_n}_\infty = m_l \cdot n > \sqrt{\frac{1}{3n}} \cdot n = \sqrt{\frac{1}{3}n} = \norm{f_n}_2
+\end{align*}
+Therefore, $\|f_n\|_1$ and $\|f_n\|_\infty$ are not equivalent.
 
+\item Equivalence of $\|f_n\|_1$ and $\|f_n\|_2$
+\begin{align*}
+\forall m_l > 0, \exists f_n \in C([0,1], \R) \text{ and } n > \frac{3}{4m_l^2}, m_l\norm{f_n}_2 = m_l \cdot \sqrt{\frac{1}{3}n} > m_l \cdot \sqrt{\frac{1}{3} \cdot \frac{3}{4m_l^2}} = \frac{1}{2} = \norm{f_n}_1
+\end{align*}
+Therefore, $\|f_n\|_1$ and $\|f_n\|_2$ are not equivalent.
+\end{itemize}
+To conclude, none of them is equivalent to another.
 
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-%2017, 2
+
+% exercise 2
 {\bf Exercise 2. (Banach fixed point theorem  {\bf$[25\, \text{points in total}]$})}
 \begin{enumerate}
 \item {\bf$[20\, \text{points}]$} Let $\left(X, \left\lVert\cdot\right\rVert\right)$ be a Banach space, and $f:X\rightarrow X$. Assume that there exists $\alpha\in[0,\, 1)$ such that, for all $x,y\in X$,
@@ -280,6 +236,9 @@ $\forall k \in N:$
 	&\leq \left(1+\alpha+\cdots+\alpha^{k-2}+\alpha^{k-1}\right)\norm{f(x)-x} \\
 	&=\frac{1-\alpha^k}{1-\alpha}\norm{f(x)-x}
 \end{align*}
+
+\clearpage
+
 $\forall \epsilon>0,\exists N = \bigg\lceil \log_\alpha\left(\frac{\epsilon(1-\alpha)}{\norm{f(x)-x}}+\alpha^m\right) \bigg\rceil \in \N \ (\lceil t \rceil \text{ means the smallest integer greater than } t),\forall m \geq N,$
 \begin{align*}
 \norm{f^{[m]}(x)-f^{[N]}(x)} 
@@ -298,7 +257,8 @@ Therefore, there exist $\bar{x}=f^*$ such that $f(\bar{x}) = \bar{x}$. Next, we 
 \begin{align*}
 	\norm{f(\bar{x}_2)-f(\bar{x}_1)} =\norm{\bar{x}_2-\bar{x}_1} \leq \alpha\norm{\bar{x}_2-\bar{x}_1}	
 \end{align*}
-Since $\alpha \in [0,1)$, $\alpha \neq 1$. The above inequality never holds, which leads to contradiction, so $\bar{x}$ is unique.
+Since $\alpha \in [0,1)$, $\alpha \neq 1$. The above inequality never holds, which leads to contradiction, so $\bar{x}$ is unique. \\
+
 \noindent \textbf {Solution 2.2} \\
 Let $F$ be the representation of linear map $f(\cdot)$. $\forall x,y \in X$:
 \begin{align*}
@@ -310,11 +270,9 @@ $\forall u \in X, \exists x,y \in X$ such that $u = x-y$.
 \end{align*}
 Therefore, the induced norm of $f$ is bounded by $\alpha$.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\bigskip
+\clearpage
 
-\noindent
-% 2017, 2
+% exercise 3
 {\bf Exercise 3. (Ordinary differential equations {\bf$[30\, \text{points in total}]$})}
 \begin{enumerate}
 	\item {\bf$[12\, \text{points}]$} Consider the following ordinary differential equation (ODE)
@@ -357,8 +315,9 @@ where $x_i(t) \in \R,\, \forall i$. Prove or disprove the following statements:
 	\abs{\frac{\partial p_2}{\partial x_1}} &= \abs{\cos(x_1-x_2)} \leq 1\\
 	\abs{\frac{\partial p_2}{\partial x_2}} &=\abs{-1-\cos(x_1-x_2)}\leq 1 + \abs{-\cos(x_1-x_2)} \leq 2\\
 \end{align*}
-The function $p$ is differentiable in $x_1,x_2$ and the derivative is bounded by $1+e^t$, which leads to the conclusion that the system is globally Lipschitz. \\
-It is obvious that $p(x,t)$ is continuous in $t$. From (a) we know that $p(x,t)$ is globally Lipschitz with respect to $x$. Per \textbf{Theorem~{3.6}}, the system admits a unique solution.
+The function $p$ is differentiable in $x_1,x_2$ and the derivative is bounded by $1+e^t$, which leads to the conclusion that the system is globally Lipschitz. It is also obvious that $p(x,t)$ is continuous in $t$. From (a) we know that $p(x,t)$ is globally Lipschitz with respect to $x$. Per \textbf{Theorem~{3.6}}, the system admits a unique solution. \\
+
+\clearpage
 
 \noindent \textbf {Solution 3.2} \\
 Expand the second row of the system dynamics:
@@ -391,6 +350,6 @@ Take the gradient of the system dynamics:
 \abs{\frac{\partial p_2}{\partial x_1}} &= \abs{0} \leq 0 \defeq K_{21}(t) \\
 \abs{\frac{\partial p_2}{\partial x_2}} &= \abs{-2} \leq -2 \defeq K_{22}(t)
 \end{align*}
-Since the derivative is bounded, $p(x,t)$ is Lipschitz with respect to $x$. Obviously, $p(x,t)$ is continuous with respect to $t$. By existence and uniqueness of the linear ordinary differential equation, the system admits a unique solution.
+Since the derivative is bounded, $p(x,t)$ is globally Lipschitz with respect to $x$. Obviously, $p(x,t)$ is continuous with respect to $t$. By existence and uniqueness of the linear ordinary differential equation, the system admits a unique solution.
 
 \end{document}
