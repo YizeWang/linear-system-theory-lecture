@@ -1,4 +1,13 @@
-\documentclass[fleqn, 10.5pt, a4paper]{article}
+% style settings
+\documentclass[a4paper,10.5pt]{article}
+\headsep 16mm
+\parindent 0mm
+\headheight 8mm
+\topmargin -20mm
+\textwidth 160mm
+\textheight 240mm
+\baselineskip 7mm
+\oddsidemargin -.15in
 
 \usepackage{psfrag}
 \usepackage[dvips]{epsfig}
@@ -7,74 +16,42 @@
 \usepackage{epsfig}
 \usepackage{color}
 
-\newcommand\R{{\mathbb R}}
-\renewcommand{\Re}{{\mathbb R}}
-\newcommand\N{{\mathbb N}}
-\newcommand\C{{\mathbb C}}
-\newcommand\Z{{\mathbb Z}}
-\newcommand\Q{{\mathbb Q}}
-\renewcommand\C{\mathbb{C}}
-\newcommand\I{\mathcal{I}}
-\newcommand\A{\mathcal{A}}
-\newcommand\B{\mathcal{B}}
-\newcommand\U{\mathcal{U}}
-\newcommand\V{\mathcal{V}}
-\newcommand\W{\mathcal{W}}
-\newcommand\F{\mathcal{F}}
-\newcommand\Nscr{{\mathcal{N}}}
-\newcommand\Mscr{{\mathcal{M}}}
-\newcommand{\qed}{\begin{flushright}$\blacksquare$\end{flushright}}
+% import packages
+\usepackage{color}
+\usepackage{epsfig}
+\usepackage{psfrag}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{theorem}
+\usepackage{multicol}
+\usepackage{mathtools}
 
-\newtheorem{theorem}{Theorem}
-\newtheorem{corollary}{Corollary}
+% define shortcuts
+\def\dim{{\mbox{\em dim}}}
+\def\ifpart{\textbf{(if) }}
+\def\rank{{\mbox{\sc Rank}}}
+\def\null{{\mbox{\sc Null}}}
+\def\range{{\mbox{\sc Range}}}
+\def\domain{{\mbox{\em domain}}}
+\def\nullity{{\mbox{\sc Nullity}}}
+\def\onlyifpart{\textbf{(only if) }}
+\def\solution{\noindent{\it Solution.}}
+
+% define new commands and environment
 \newtheorem{lemma}{Lemma}
 \newtheorem{proof}{Proof}
-\newtheorem{proposition}{Proposition}
-\newtheorem{acknowledgement}{Acknowledgement}
-\newtheorem{algorithm}{Algorithm}
-\newtheorem{axiom}{Axiom}
-\newtheorem{case}{Case}
-\newtheorem{claim}{Claim}
-\newtheorem{conclusion}{Conclusion}
-\newtheorem{condition}{Condition}
-\newtheorem{criterion}{Criterion}
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}
-\newtheorem{example}{Example}
-\newtheorem{exercise}{Exercise}
-\newtheorem{notation}{Notation}
-\newtheorem{problem}{Problem}
-\newtheorem{remark}{Remark}
-\newtheorem{solution}{Solution}
-\newtheorem{summary}{Summary}
-\numberwithin{equation}{section}
-
-\newcommand{\bmat}{\left[ \begin{array}}
-\newcommand{\emat}{\end{array} \right]}
-\newcommand{\spnop}{\mathop{\rm span}}
-\renewcommand{\bmat}{\left[ \begin{array}}
-\renewcommand{\emat}{\end{array} \right]}
-
-\headheight 8mm
-\headsep 16mm
-\topmargin  -20mm
-\oddsidemargin -.15in
-\textwidth 160mm
-\textheight 240mm
-\baselineskip 7mm
-\parindent 0mm
-
-\newcommand{\domain}{{\mbox{\em domain}}}
-\renewcommand{\dim}{{\mbox{\em dim}}}
-\newcommand{\range}{{\mbox{\sc Range}}}
-\renewcommand{\null}{{\mbox{\sc Null}}}
-\newcommand{\nullity}{{\mbox{\sc Nullity}}}
-\newcommand{\rank}{{\mbox{\sc Rank}}}
-\newcommand{\spn}{{\mbox{\sc Span}}}
-
-\newcommand{\ifpart}{\textbf{(if) }}
-\newcommand{\onlyifpart}{\textbf{(only if) }}
-\renewcommand{\solution}{\noindent{\it Solution.} }
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\defeq}{\vcentcolon=}
+\newcommand{\dt}{\, \mathrm{d} t}
+\newcommand{\dx}{\, \mathrm{d} x}
+\newcommand{\supx}{\sup_{x\neq0}}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\spanop}{\mathop{\rm span}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newenvironment{mymat}{\left[\begin{matrix}}{\end{matrix}\right]}
 
 \begin{document}
 \thispagestyle{plain}
@@ -171,7 +148,13 @@ Therefore, $(F, \R, \oplus,\odot)$ is a linear space and the zero-vector is $1$.
 
 \noindent {\bf Solution 1.3} \\
 
-$\forall a_1, a_2 \in \R, \forall f_1, f_2 \in F, \varphi\left((a_1 \odot f_1) \oplus (a_2 \odot f_2) \right) = \varphi({f_1}^{a_1}{f_2}^{a_2}) = \sqrt{{f_1}^{a_1}{f_2}^{a_2}} = \sqrt{{f_1}^{a_1}}\sqrt{{f_2}^{a_2}} = {\sqrt{f_1}}^{a_1}{\sqrt{f_2}}^{a_2} = \left(a_1 \odot \sqrt{f_1}\right)\left(a_2 \odot \sqrt{f_2}\right) = \left(a_1 \odot \varphi(f_1)\right)\left(a_2 \odot \varphi{f_2} \right)= \left(a_1 \odot \varphi(f_1)\right) \oplus \left(a_2 \odot \varphi(f_2)\right)$ \\
+$\forall a_1, a_2 \in \R, \forall f_1, f_2 \in F$, 
+\begin{align*}
+\varphi\left((a_1 \odot f_1) \oplus (a_2 \odot f_2) \right) 
+&= \varphi({f_1}^{a_1}{f_2}^{a_2}) = \sqrt{{f_1}^{a_1}{f_2}^{a_2}} = \sqrt{{f_1}^{a_1}}\sqrt{{f_2}^{a_2}} \\ 
+&= {\sqrt{f_1}}^{a_1}{\sqrt{f_2}}^{a_2} = \left(a_1 \odot \sqrt{f_1}\right)\left(a_2 \odot \sqrt{f_2}\right) \\
+&= \left(a_1 \odot \varphi(f_1)\right)\left(a_2 \odot \varphi{f_2} \right)= \left(a_1 \odot \varphi(f_1)\right) \oplus \left(a_2 \odot \varphi(f_2)\right)
+\end{align*}
 Therefore, $\varphi$ is a linear map over the space $F$ on $(F, \mathbb{R}, \oplus, \odot)$.
 
 \clearpage
@@ -250,8 +233,16 @@ where $U$ has finite dimension $n$.
 \end{enumerate}
 
 {\bf Solution 3.1} \\
+\begin{align*}
+\A(\nu_1) &= \lambda \nu_1 + \nu_2 \\
+\A(\nu_2) &= \lambda \nu_2 + \nu_3 \\
+		  &\; \; \vdots \\
+\A(\nu_{n-1}) &= \lambda \nu_{n-1} + \nu_n \\
+\A(\nu_n) &= \lambda \nu_n
+\end{align*}
 
-$a_{ij} = \begin{cases}
+\begin{align*}
+a_{ij} = \begin{cases}
 \lambda & i = j \\
 1 & j = i + 1 \\
 0 & otherwise
@@ -261,7 +252,9 @@ $a_{ij} = \begin{cases}
 & & \ddots &\ddots & \\
 & & & \lambda & 1 \\
 & & & & \lambda
-\end{matrix}\right]$ \\
+\end{matrix}\right]
+\end{align*}
+
 
 {\bf Solution 3.2} \\
 

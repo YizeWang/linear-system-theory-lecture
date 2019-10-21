@@ -350,6 +350,10 @@ Take the gradient of the system dynamics:
 \abs{\frac{\partial p_2}{\partial x_1}} &= \abs{0} \leq 0 \defeq K_{21}(t) \\
 \abs{\frac{\partial p_2}{\partial x_2}} &= \abs{-2} \leq -2 \defeq K_{22}(t)
 \end{align*}
-Since the derivative is bounded, $p(x,t)$ is globally Lipschitz with respect to $x$. Obviously, $p(x,t)$ is continuous with respect to $t$. By existence and uniqueness of the linear ordinary differential equation, the system admits a unique solution.
+Since the derivative is bounded, $p(x,t)$ is globally Lipschitz with respect to $x$. Obviously, $p(x,t)$ is continuous with respect to $t$. By existence and uniqueness of the linear ordinary differential equation, the system admits a unique solution. \\
+
+\textbf{Question} \\
+
+If I can get a solution manually and the function is differentiable, does this imply the function is Lipschitz continuous? Because the existence of solution means $x$ can be explicitly expressed as a function of $t$ and the derivative can also be expressed as a function of $t$, whose norm can be further defined as $K(t)$.
 
 \end{document}
