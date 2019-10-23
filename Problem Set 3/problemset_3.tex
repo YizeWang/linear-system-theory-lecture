@@ -1,0 +1,109 @@
+% style settings
+\documentclass[a4paper,10.5pt]{article}
+\headsep 16mm
+\parindent 0mm
+\headheight 8mm
+\topmargin -20mm
+\textwidth 160mm
+\textheight 240mm
+\baselineskip 7mm
+\oddsidemargin -.15in
+
+\usepackage{psfrag}
+\usepackage[dvips]{epsfig}
+\usepackage{amsmath,amssymb}
+\usepackage{theorem}
+\usepackage{epsfig}
+\usepackage{color}
+
+% import packages
+\usepackage{color}
+\usepackage{epsfig}
+\usepackage{psfrag}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{theorem}
+\usepackage{multicol}
+\usepackage{mathtools}
+
+% define shortcuts
+\def\dim{{\mbox{\em dim}}}
+\def\ifpart{\textbf{(if) }}
+\def\rank{{\mbox{\sc Rank}}}
+\def\null{{\mbox{\sc Null}}}
+\def\range{{\mbox{\sc Range}}}
+\def\domain{{\mbox{\em domain}}}
+\def\nullity{{\mbox{\sc Nullity}}}
+\def\onlyifpart{\textbf{(only if) }}
+\def\solution{\noindent{\it Solution.}}
+
+% define new commands and environment
+\newtheorem{lemma}{Lemma}
+\newtheorem{proof}{Proof}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\defeq}{\vcentcolon=}
+\newcommand{\dt}{\, \mathrm{d} t}
+\newcommand{\dx}{\, \mathrm{d} x}
+\newcommand{\supx}{\sup_{x\neq0}}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\spanop}{\mathop{\rm span}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newenvironment{mymat}{\left[\begin{matrix}}{\end{matrix}\right]}
+
+\begin{document}
+\thispagestyle{plain}
+
+% title
+\vspace*{-1.5cm} {\noindent \rule{15.8cm}{.3mm} \\[.3cm]}
+\begin{center} \bf
+{\large Linear System Theory \medskip \\
+Problem Set 3 \\
+Linear Time-Varying Systems, Linear Time-Invariant Systems \medskip
+\\ Issue date: Oct. 21, 2019 \\ Due date: Oct. 31, 2019}
+\end{center}
+\rule{15.8cm}{.3mm} \\[1cm]
+
+% exercise 1
+\noindent {\bf Exercise 1. (Linear Time-Varying Systems, $[$50 points in total$]$)}
+
+Let $A_1(t), A_2(t)$, $F(t) \in \R^{n \times n}$ be piecewise continuous matrix functions. Let $\Phi_i$ be the state transition matrix for $\dot{x}(t) = A_i(t)x(t)$, for $i = 1,2$. Consider the matrix differential equation:
+\begin{align*}
+\dot{X}(t) = A_1(t)X(t) + X(t) A^T_2(t) + F(t), \; X(t_0) = X_0,
+\end{align*}
+where $X(t)\in \R^{n\times n}$ for any $t\ge t_0$.
+
+\begin{enumerate}
+\item $[$20 {\bf points}$]$ Show that this is an affine time-varying system.  (Hint: An affine time-varying system is a system of the form $\dot{x}(t) = A(t)x(t) + b(t)$, where $x(t)$ and $b(t)$ are vectors.)
+\item $[$30 {\bf points}$]$ Assume that the solution of the above system can be written as:
+\begin{align*}
+X(t) = \Phi_1(t,t_0) X_0 \Phi^T_2(t,t_0) + \int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)d\tau.
+\end{align*}
+Express the matrix $M(t,\tau)$ as a function of $\Phi_1(t,\tau)$, $F(t)$, and $\Phi_2(t,\tau)$. (Hint: $\Phi_1(t,\tau)$, $F(t)$, and $\Phi_2(t,\tau)$ may not all appear in the expression of $M(t,\tau)$.)
+\end{enumerate}
+
+\clearpage
+
+% exercise 2
+\noindent {\bf Exercise 2. (Linear Time-Invariant Systems, $[$50 points in total$]$)}
+
+Consider the following affine system:
+\begin{equation*}
+  \dot{x}(t) = A\, x(t) + 
+  \begin{bmatrix}
+0\\ 1\\ 0\end{bmatrix}\, \quad
+  y(t) = \begin{bmatrix}1 & 1 & 0\end{bmatrix}\, x(t).
+\end{equation*}
+where $A \in \R^{3 \times 3}$.
+The matrix $A$ has eigenvalues $\lambda_1 = -2$ with multiplicity~2, and $\lambda_2 = -1$ with multiplicity~1.
+The eigenvalue $\lambda_1$ has an eigenvector $v_1 = \begin{bmatrix}0\\ 2\\ 1\end{bmatrix}$, and a generalized eigenvector $v_1' = \begin{bmatrix}-1\\ 0\\ 1\end{bmatrix}$.
+The eigenvalue $\lambda_2$ has the eigenvector $v_2 = \begin{bmatrix}0\\ 1\\ 0\end{bmatrix}$.
+\begin{enumerate}
+	\item $[$20 points$]$ Find the matrix $A$.
+	\item $[$20 points$]$ Calculate $\exp(A\, t)$.
+	\item $[$10 points$]$ Given $x(0)=[0\,\,0\,\,1]^{\top}$, compute $y(t)$.
+\end{enumerate}
+
+\end{document}
