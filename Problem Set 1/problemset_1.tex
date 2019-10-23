@@ -244,14 +244,14 @@ where $U$ has finite dimension $n$.
 \begin{align*}
 a_{ij} = \begin{cases}
 \lambda & i = j \\
-1 & j = i + 1 \\
+1 & i = j + 1 \\
 0 & otherwise
 \end{cases} \Rightarrow A = \left[\begin{matrix}
-\lambda & 1 & & & \\
-& \lambda &1 & & \\
-& & \ddots &\ddots & \\
-& & & \lambda & 1 \\
-& & & & \lambda
+\lambda & & & & \\
+1 & \lambda & & & \\
+& 1 & \ddots & & \\
+& & \ddots & \lambda & \\
+& & & 1 & \lambda
 \end{matrix}\right]
 \end{align*}
 
@@ -263,15 +263,14 @@ Since the set $\{b, {\A}(b), {\A} \circ {\A}(b), \ldots, {\A}^{n-1}(b)\}$ is lin
 $\exists c_1,\dots,c_n \in F$, which are not all zero, such that $\A^n(b) = c_1b + \cdots + c_n\A^{n-1}(b)$. \\
 
 $a_{ij} = \begin{cases}
-1 & j = i + 1 \\
-c_j & i = n \\
+1 & i = j + 1 \\
+c_j & j = n \\
 0 & otherwise
 \end{cases} \Rightarrow A = \left[\begin{matrix}
- & 1 & & & \\
-&  &1 & & \\
-& &  &\ddots & \\
-& & &  & 1 \\
-c_1 & & \cdots & & c_n
+1 & & & & c_1\\
+& 1 & & & \vdots \\
+&  & \ddots & & \vdots\\
+& &  & 1 & c_n
 \end{matrix}\right]$
 
 \end{document}
