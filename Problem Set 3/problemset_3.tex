@@ -30,7 +30,6 @@
 \def\dim{{\mbox{\em dim}}}
 \def\ifpart{\textbf{(if) }}
 \def\rank{{\mbox{\sc Rank}}}
-\def\null{{\mbox{\sc Null}}}
 \def\range{{\mbox{\sc Range}}}
 \def\domain{{\mbox{\em domain}}}
 \def\nullity{{\mbox{\sc Nullity}}}
@@ -40,6 +39,7 @@
 % define new commands and environment
 \newtheorem{lemma}{Lemma}
 \newtheorem{proof}{Proof}
+\newcommand{\de}{\mathrm{d}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\A}{\mathcal{A}}
@@ -84,6 +84,51 @@ X(t) = \Phi_1(t,t_0) X_0 \Phi^T_2(t,t_0) + \int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)
 Express the matrix $M(t,\tau)$ as a function of $\Phi_1(t,\tau)$, $F(t)$, and $\Phi_2(t,\tau)$. (Hint: $\Phi_1(t,\tau)$, $F(t)$, and $\Phi_2(t,\tau)$ may not all appear in the expression of $M(t,\tau)$.)
 \end{enumerate}
 
+\noindent {\bf Solution 1.1} \\
+Let $x_{ij},a^{(1)}_{ij},a^{(2)}_{ij},f_{ij}$ denote the $i^{th}$ row and $j^{th}$ column element of matrix $X,A_1,A_2,F$ respectively. According to the matrix differential equation, $x_{ij}$ can be expressed as
+\begin{align*}
+x_{ij} &= \sum_{k=1}^{n} a^{(1)}_{ik}x_{kj} + \sum_{k=1}^{n}x_{ik}a^{(2)}_{jk} + f_{ij} \\
+&= \sum_{k=1}^{n} \left(a^{(1)}_{ik}x_{kj} + a^{(2)}_{jk}x_{ik}\right) + f_{ij}
+\end{align*}
+Define vector $v \in \R^{n^2}$ and let $v_{i+n(j-1)}=x_{ij}$. Plug $v$ into the equation above:
+\begin{align}
+\label{eq:linear_combination}
+v_{i+n(j-1)} = \sum_{k=1}^{n} a^{(1)}_{ik}v_{k+n(j-1)} + \sum_{k=1}^{n}v_{i+n(k-1)}a^{(2)}_{jk} + f_{ij}
+\end{align}
+Similarly, define vector $b$ and let $b_{i+n(j-1)}=F_{ij}$.
+As a consequence, we can rewrite the system dynamics as
+\begin{align*}
+\dot{v}(t) = A(t)v(t)+b(t) \; ,
+\end{align*}
+where $A(t)$ is uniquely defined by \eqref{eq:linear_combination} and $b(t)$ defined by $F(t)$. \\
+Thus, the system is an affine time-varying system. \\
+
+\noindent {\bf Solution 1.2} \\
+\begin{flalign*}
+\frac{\de}{\de t}\left[\int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau\right] 
+&= \int_{t_0}^{t}\frac{\de}{\de t}\left(\Phi_1(t,\tau)M(t,\tau)\right)\de\tau + \Phi_1(t,t)M(t,t) \cdot 1 &\\
+&= \int_{t_0}^t A_1(t) \Phi_1(t,\tau) M(t,\tau)\de\tau + \int_{t_0}^t \Phi_1(t,\tau)\frac{\de}{\de t}M(t,\tau)\de \tau + M(t,t) &\\
+&= A_1(t)\int_{t_0}^t \Phi_1(t,\tau) M(t,\tau)\de\tau + \int_{t_0}^t \Phi_1(t,\tau)\frac{\de}{\de t}M(t,\tau)\de \tau + M(t,t) &
+\end{flalign*}
+\begin{flalign*}
+\dot{X}(t) &= A_1(t)\Phi_1(t,t_0)X_0\Phi^T_2(t,t_0) + \Phi_1(t,t_0)X_0\Phi^T_2(t,t_0)A_2^T(t) + \frac{\de}{\de t}\left[\int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau\right] &\\
+&=A_1(t)X(t) - A_1(t)\int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau + X(t)A_2^T(t) - \int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau A_2^T(t) &\\
+&\phantom{=}+ A_1(t)\int_{t_0}^t \Phi_1(t,\tau) M(t,\tau)\de\tau + \int_{t_0}^t \Phi_1(t,\tau)\frac{\de}{\de t}M(t,\tau)\de \tau + M(t,t) &\\
+&=A_1(t)X(t)+X(t)A_2^T(t)-\int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau A_2^T(t)+\int_{t_0}^t \Phi_1(t,\tau)\frac{\de}{\de t}M(t,\tau)\de \tau + M(t,t) &
+\end{flalign*}
+From the matrix differential equation, we also know that
+\begin{align*}
+\dot{X}(t) = A_1(t)X(t) + X(t) A^T_2(t) + F(t)
+\end{align*}
+Compare these two equations, it follows immediately
+\begin{align*}
+F(t) = -\int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau A_2^T(t)+\int_{t_0}^t \Phi_1(t,\tau)\frac{\de}{\de t}M(t,\tau)\de \tau + M(t,t)
+\end{align*}
+
+
+
+
+
 \clearpage
 
 % exercise 2
@@ -102,7 +147,7 @@ The eigenvalue $\lambda_1$ has an eigenvector $v_1 = \begin{bmatrix}0\\ 2\\ 1\en
 The eigenvalue $\lambda_2$ has the eigenvector $v_2 = \begin{bmatrix}0\\ 1\\ 0\end{bmatrix}$.
 \begin{enumerate}
 	\item $[$20 points$]$ Find the matrix $A$.
-	\item $[$20 points$]$ Calculate $\exp(A\, t)$.
+	\item $[$20 points$]$ Calculate $\exp(At)$.
 	\item $[$10 points$]$ Given $x(0)=[0\,\,0\,\,1]^{\top}$, compute $y(t)$.
 \end{enumerate}
 
