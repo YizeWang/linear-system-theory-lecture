@@ -208,5 +208,72 @@ A&=\begin{bmatrix}
 \end{align*}
 
 \noindent {\bf Solution 2.2}
+\begin{align*}
+T^{-1} &= \begin{bmatrix}
+v_1 & v_1' & v_2
+\end{bmatrix} = \begin{bmatrix}
+0 & -1 & 0 \\
+2 & 0 & 1 \\
+1 & 1 & 0
+\end{bmatrix}, \quad
+T = \begin{bmatrix}
+1 & 0 & 1 \\
+-1 & 0 & 0 \\
+-2 & 1 & -2
+\end{bmatrix} \\
+J_1 &= \begin{bmatrix}
+-2 & 1  \\
+& -2 \end{bmatrix}, \quad J_2 = -1, \quad
+J = \begin{bmatrix}
+-2 & 1 &  \\
+ & -2 &  \\
+ &  & -1
+\end{bmatrix} \\
+e^{J_1t} &= \begin{bmatrix}
+e^{-2t} & te^{-2t} \\
+0 & e^{-2t}
+\end{bmatrix}, \quad e^{J_2t} = e^{-t}, \quad 
+e^{Jt} = \begin{bmatrix}
+e^{-2t} & te^{-2t} &\\
+ & e^{-2t} & \\
+& & e^{-t}
+\end{bmatrix} \\
+e^{At} &= T^{-1}e^{Jt}T = \begin{bmatrix}
+e^{-2t} & 0 & 0\\
+2e^{-2t}-2e^{-t}-2te^{-2t} & e^{-t} & 2e^{-2t}-2e^{-t} \\
+-te^{-2t} & 0 & e^{-2t} \end{bmatrix}
+\end{align*}
+
+\clearpage
+
+\noindent {\bf Solution 2.3}
+\begin{align*}
+\Phi(t,0) &= e^{At} = \begin{bmatrix}
+e^{-2t} & 0 & 0\\
+2e^{-2t}-2e^{-t}-2te^{-2t} & e^{-t} & 2e^{-2t}-2e^{-t} \\
+-te^{-2t} & 0 & e^{-2t} \end{bmatrix}, \quad B(t)u(t) = \begin{bmatrix}
+0 \\ 1 \\ 0
+\end{bmatrix}, \quad x_0 = \begin{bmatrix}
+0 \\ 0 \\ 1
+\end{bmatrix} \\
+x(t) &= \Phi(t,0)x_0 + \int_0^t\Phi(t,\tau)B(\tau)u(\tau)\de\tau \\
+&=\begin{bmatrix}
+0 \\ 2e^{-2t}-2e^{-t} \\ e^{-2t} \end{bmatrix} + \int_0^t\Phi(t,\tau)\begin{bmatrix}
+0 \\ 1 \\ 0
+\end{bmatrix}\de\tau \\
+&=\begin{bmatrix}
+0 \\ 2e^{-2t}-2e^{-t} \\ e^{-2t} \end{bmatrix} + \int_0^t\begin{bmatrix}
+0 \\ e^{-t+\tau} \\ 0
+\end{bmatrix}\de\tau \\
+&=\begin{bmatrix}
+0 \\ 2e^{-2t}-2e^{-t} \\ e^{-2t} \end{bmatrix} + \begin{bmatrix}
+0 \\ 1-e^{-t} \\ 0 \end{bmatrix} \\
+&=\begin{bmatrix}
+0 \\ 1+2e^{-2t}-3e^{-t} \\ e^{-2t} \end{bmatrix} \\
+y(t) &= \begin{bmatrix}1 & 1 & 0\end{bmatrix}x(t) \\
+&=1+2e^{-2t}-3e^{-t}
+\end{align*}
+
+
 
 \end{document}
