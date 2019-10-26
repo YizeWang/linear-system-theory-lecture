@@ -42,6 +42,7 @@
 \newcommand{\de}{\mathrm{d}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
+\newcommand{\I}{\mathbb{I}}
 \newcommand{\A}{\mathcal{A}}
 \newcommand{\B}{\mathcal{B}}
 \newcommand{\defeq}{\vcentcolon=}
@@ -82,28 +83,47 @@ where $X(t)\in \R^{n\times n}$ for any $t\ge t_0$.
 X(t) = \Phi_1(t,t_0) X_0 \Phi^T_2(t,t_0) + \int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)d\tau.
 \end{align*}
 Express the matrix $M(t,\tau)$ as a function of $\Phi_1(t,\tau)$, $F(t)$, and $\Phi_2(t,\tau)$. (Hint: $\Phi_1(t,\tau)$, $F(t)$, and $\Phi_2(t,\tau)$ may not all appear in the expression of $M(t,\tau)$.)
-\end{enumerate}
+\end{enumerate}\par
 
 \noindent {\bf Solution 1.1} \\
+
 Let $x_{ij},a^{(1)}_{ij},a^{(2)}_{ij},f_{ij}$ denote the $i^{th}$ row and $j^{th}$ column element of matrix $X,A_1,A_2,F$ respectively. According to the matrix differential equation, $x_{ij}$ can be expressed as
-\begin{align*}
-x_{ij} &= \sum_{k=1}^{n} a^{(1)}_{ik}x_{kj} + \sum_{k=1}^{n}x_{ik}a^{(2)}_{jk} + f_{ij} \\
+\begin{align}
+\label{eq:elementwise_expression}
+x_{ij} &= \sum_{k=1}^{n} a^{(1)}_{ik}x_{kj} + \sum_{k=1}^{n}x_{ik}a^{(2)}_{jk} + f_{ij} \nonumber \\
 &= \sum_{k=1}^{n} \left(a^{(1)}_{ik}x_{kj} + a^{(2)}_{jk}x_{ik}\right) + f_{ij}
+\end{align}
+Let $x_{ci}$ and $f_{ci}$ denote the $i^{th}$ column of matrix $X$ and $F$ respectively. Define vector $\tilde{x},\tilde{f}\in \R^{n^2}$ by rearranging $x_{ci}$ and $f_{ci}$:
+\begin{align*}
+\tilde{x} &= \begin{bmatrix}x_{c1} & \cdots & x_{cn}\end{bmatrix}^\top \; ,\\
+\tilde{f} &= \begin{bmatrix}f_{c1} & \cdots & f_{cn}\end{bmatrix}^\top \; .
 \end{align*}
-Define vector $v \in \R^{n^2}$ and let $v_{i+n(j-1)}=x_{ij}$. Plug $v$ into the equation above:
+Based on the equation \eqref{eq:elementwise_expression}, elements of $\dot{\tilde{x}}$ can be expressed as
 \begin{align}
 \label{eq:linear_combination}
-v_{i+n(j-1)} = \sum_{k=1}^{n} a^{(1)}_{ik}v_{k+n(j-1)} + \sum_{k=1}^{n}v_{i+n(k-1)}a^{(2)}_{jk} + f_{ij}
+\dot{\tilde{x}}_{i+n(j-1)} = \sum_{k=1}^{n} a^{(1)}_{ik}\tilde{x}_{k+n(j-1)} + \sum_{k=1}^{n}a^{(2)}_{jk}\tilde{x}_{i+n(k-1)} + f_{ij} \; ,
 \end{align}
-Similarly, define vector $b$ and let $b_{i+n(j-1)}=F_{ij}$.
-As a consequence, we can rewrite the system dynamics as
+which defines an affine time-varying system. To express it more explicitly, we define augmented matrix $\tilde{A_1}$ and $\tilde{A_2}$ to facilitate further notation:
 \begin{align*}
-\dot{v}(t) = A(t)v(t)+b(t) \; ,
+\tilde{A}_1 &= \text{diag}(A, \dots, A) = \begin{bmatrix}
+A &        &   \\
+  & \ddots &   \\
+  &        & A
+\end{bmatrix} \; , \\
+\tilde{A}_2 &= \begin{bmatrix}
+\text{diag}(a^{(2)}_{11}) & \text{diag}(a^{(2)}_{12}) & \cdots &\text{diag}(a^{(2)}_{1n}) \\
+\text{diag}(a^{(2)}_{21}) & \text{diag}(a^{(2)}_{22}) & \cdots &\text{diag}(a^{(2)}_{2n}) \\
+\vdots & \vdots & \ddots & \vdots \\
+\text{diag}(a^{(2)}_{n1}) & \text{diag}(a^{(2)}_{n2}) & \cdots &\text{diag}(a^{(2)}_{nn}) \\
+\end{bmatrix} \; ,
 \end{align*}
-where $A(t)$ is uniquely defined by \eqref{eq:linear_combination} and $b(t)$ defined by $F(t)$. \\
-Thus, the system is an affine time-varying system. \\
+where $\text{diag}(a^{(2)}_{ij})$ denotes an $n \times n$ diagonal matrix whose diagonal elements are all $a^{(2)}_{ij}$. Then the system can be fully describe by an affine time-varying system in the standard form:
+\begin{align*}
+\dot{\tilde{x}}(t) = \left(\tilde{A}_1(t)+\tilde{A}_2(t)\right)\tilde{x}(t)+f(t)
+\end{align*} \par
 
 \noindent {\bf Solution 1.2} \\
+
 \begin{flalign*}
 \frac{\de}{\de t}\left[\int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau\right] 
 &= \int_{t_0}^{t}\frac{\de}{\de t}\left(\Phi_1(t,\tau)M(t,\tau)\right)\de\tau + \Phi_1(t,t)M(t,t) \cdot 1 &\\
@@ -112,9 +132,9 @@ Thus, the system is an affine time-varying system. \\
 \end{flalign*}
 \begin{flalign*}
 \dot{X}(t) &= A_1(t)\Phi_1(t,t_0)X_0\Phi^T_2(t,t_0) + \Phi_1(t,t_0)X_0\Phi^T_2(t,t_0)A_2^T(t) + \frac{\de}{\de t}\left[\int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau\right] &\\
-&=A_1(t)X(t) - A_1(t)\int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau + X(t)A_2^T(t) - \int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau A_2^T(t) &\\
+&=A_1(t)X(t) - A_1(t)\int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau + X(t)A_2^T(t) - \left( \int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau \right) A_2^T(t) &\\
 &\phantom{=}+ A_1(t)\int_{t_0}^t \Phi_1(t,\tau) M(t,\tau)\de\tau + \int_{t_0}^t \Phi_1(t,\tau)\frac{\de}{\de t}M(t,\tau)\de \tau + M(t,t) &\\
-&=A_1(t)X(t)+X(t)A_2^T(t)-\int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau A_2^T(t)+\int_{t_0}^t \Phi_1(t,\tau)\frac{\de}{\de t}M(t,\tau)\de \tau + M(t,t) &
+&=A_1(t)X(t)+X(t)A_2^T(t)-\left( \int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau \right) A_2^T(t)+\int_{t_0}^t \Phi_1(t,\tau)\frac{\de}{\de t}M(t,\tau)\de \tau + M(t,t) &
 \end{flalign*}
 From the matrix differential equation, we also know that
 \begin{align*}
@@ -122,12 +142,36 @@ From the matrix differential equation, we also know that
 \end{align*}
 Compare these two equations, it follows immediately
 \begin{align*}
-F(t) = -\int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau A_2^T(t)+\int_{t_0}^t \Phi_1(t,\tau)\frac{\de}{\de t}M(t,\tau)\de \tau + M(t,t)
+F(t) = -\left( \int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau \right) A_2^T(t)+\int_{t_0}^t \Phi_1(t,\tau)\frac{\de}{\de t}M(t,\tau)\de \tau + M(t,t)
 \end{align*}
+Guess a solution for $M(t,\tau)$:
+\begin{align*}
+M(t,\tau) = F(\tau)\Phi_2^T(t,\tau)
+\end{align*}
+The right-hand side would thus be
+\begin{align*}
+R &= -\left( \int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau \right) A_2^T(t)+\int_{t_0}^t \Phi_1(t,\tau)\frac{\de}{\de t}M(t,\tau)\de \tau + M(t,t) \\
+&= -\left( \int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau \right) A_2^T(t)+\int_{t_0}^t \Phi_1(t,\tau)F(\tau)\Phi_2^T(t,\tau)A_2^T(t)\de \tau + F(t)\Phi_2^T(t,t) \\
+&= F(t) \\
+&= L
+\end{align*}
+Therefore, $X(t) = \Phi_1(t,t_0) X_0 \Phi^T_2(t,t_0) + \int_{t_0}^{t}\Phi_1(t,\tau)F(\tau)\Phi_2^T(t,\tau)\mathrm{d}\tau$ is a solution to the differential equation. Next we prove the uniqueness of the solution. \\
 
-
-
-
+Define $g(X) = \dot{X}$, $\forall X_1,X_2 \in \R^{n \times n}, \forall t \geq t_0$,
+\begin{align*}
+\norm{g(X_1)-g(X_2)} &= \norm{\dot{X}_1-\dot{X}_1} \\
+&=\norm{\left(A_1X_1 + X_1 A^T_2 + F\right)-\left(A_1X_2 + X_2 A^T_2 + F\right)} \\
+&=\norm{A_1X_1-A_1X_2+ X_1 A^T_2- X_2A^T_2} \\
+&=\norm{A_1(X_1-X_2)+ (X_1-X_2)A^T_2} \\
+&\leq \norm{A_1(X_1-X_2)} + \norm{(X_1-X_2)A^T_2} \\
+&\leq \norm{A_1}\norm{X_1-X_2} + \norm{X_1-X_2}\norm{A^T_2} \\
+&= (\norm{A_1}+\norm{A_2^T})\norm{X_1-X_2} \\
+&\defeq K(t)\norm{X_1(t)-X_2(t)}
+\end{align*}
+Therefore, $g(X)$ is globally Lipschitz with respect to $X$ and piece-wise continuous with respect to $t$, which indicates the uniqueness of the solution to the matrix differential equation. Thus, $M(t,\tau) = F(\tau)\Phi_2^T(t,\tau)$ is unique. To conclude,
+\begin{align*}
+M(t,\tau) = F(\tau)\Phi_2^T(t,\tau)
+\end{align*}
 
 \clearpage
 
@@ -149,6 +193,20 @@ The eigenvalue $\lambda_2$ has the eigenvector $v_2 = \begin{bmatrix}0\\ 1\\ 0\e
 	\item $[$20 points$]$ Find the matrix $A$.
 	\item $[$20 points$]$ Calculate $\exp(At)$.
 	\item $[$10 points$]$ Given $x(0)=[0\,\,0\,\,1]^{\top}$, compute $y(t)$.
-\end{enumerate}
+\end{enumerate} \ \\
+
+\noindent {\bf Solution 2.1}
+\begin{align*}
+Av_2=\lambda_2v_2 &\Rightarrow a_{12} = 0, a_{22} = -1, a_{23} = 0 &\\
+Av_1=\lambda_1v_1 &\Rightarrow a_{13} = 0, a_{23} = -2, a_{33} = -2 &\\
+\left(A-\lambda_1\I\right)v_1'=v_1 &\Rightarrow a_{11} = -2, a_{21} = 4, a_{31} = -1 &\\
+A&=\begin{bmatrix}
+-2 &  0 &  0 \\
+-4 & -1 & -2 \\
+-1 &  0 & -2 \\
+\end{bmatrix}
+\end{align*}
+
+\noindent {\bf Solution 2.2}
 
 \end{document}

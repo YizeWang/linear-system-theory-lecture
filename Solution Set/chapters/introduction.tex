@@ -54,7 +54,7 @@ Assume, for the sake of contradiction, $\exists n \in \N$, such that $n$ is both
 	$g_L:\Y \rightarrow \X$ such that $\forall x\in \X, g_L \circ f(x) = x$ \\
 	$f(x_1)=f(x_2) \Rightarrow g_L(f(x_1)) = g_L(f(x_2)) \Rightarrow x_1 = x_2 \Rightarrow$ injective
 	\item Suppose $f$ is injective, $\forall y \in \range{f}$, $\exists ! x \in \X, f(x) = y$. \\
-	Construct $g(y)_L = \begin{cases}
+	Construct $g_L(y) = \begin{cases}
 	x & y \in \range{f} \\
 	0 & otherwise
 	\end{cases}$ \\
@@ -63,11 +63,11 @@ Assume, for the sake of contradiction, $\exists n \in \N$, such that $n$ is both
 
 \item $f$ has a right inverse if and only if it is surjective:
 \begin{itemize}
-	\item Suppose $f$ has a right inverse $g_R$, $\forall y \in \Y, f \circ g(y) = y$. \\
+	\item Suppose $f$ has a right inverse $g_R$, $\forall y \in \Y, f \circ g_R(y) = y$. \\
 	$\forall y \in \Y, \exists x = g(y) \in \X, \text{such that } f(x) = y \Rightarrow$ surjective
 	\item Suppose $f$ is surjective, $\forall y \in \Y, \exists x \in \X, f(x) = y$. \\
-	Let $g_R(y) = x$. If multiple $x$ exist, choose one of them.
-	$f(g_R(y)) = f(x) = y = 1_\Y(y)$ \\
+	Let $g_R(y) = x$. If multiple $x$ exist, choose one of them. \\
+	$f \circ g_R (y) = f(g_R(y)) = f(x) = y = 1_\Y(y)$ \\
 	Therefore $g_R(y)$ defines the right inverse function of $f$.
 \end{itemize}
 
@@ -75,6 +75,6 @@ Assume, for the sake of contradiction, $\exists n \in \N$, such that $n$ is both
 \begin{itemize}
 	\item Suppose $f$ is invertible, there exist left and right inverse of $f$. Then $f$ is both injective and surjective, which implies $f$ is bijective.
 	\item Suppose $f$ is bijective, we only need to prove $g = g_L = g_R$. \\
-	$g_L(y) = g_L \circ 1_\Y(y) = g_L(1_\Y(y)) = g_L(f\circ g_R(y)) = (g_L \circ f) \circ g_R (y) = 1_\X \circ g_R (y) = g_R(y) $
+	$g_L(y) = g_L \circ 1_\Y(y) = g_L(1_\Y(y)) = g_L(f\circ g_R(y)) = (g_L \circ f) \circ g_R (y) = 1_\X \circ g_R (y) = g_R(y) \Rightarrow g_L = g_R$
 \end{itemize}
 \end{enumerate} \QED
