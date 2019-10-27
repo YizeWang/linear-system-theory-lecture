@@ -90,13 +90,13 @@ Express the matrix $M(t,\tau)$ as a function of $\Phi_1(t,\tau)$, $F(t)$, and $\
 Let $x_{ij},a^{(1)}_{ij},a^{(2)}_{ij},f_{ij}$ denote the $i^{th}$ row and $j^{th}$ column element of matrix $X,A_1,A_2,F$ respectively. According to the matrix differential equation, $x_{ij}$ can be expressed as
 \begin{align}
 \label{eq:elementwise_expression}
-x_{ij} &= \sum_{k=1}^{n} a^{(1)}_{ik}x_{kj} + \sum_{k=1}^{n}x_{ik}a^{(2)}_{jk} + f_{ij} \nonumber \\
+\dot{x}_{ij} &= \sum_{k=1}^{n} a^{(1)}_{ik}x_{kj} + \sum_{k=1}^{n}x_{ik}a^{(2)}_{jk} + f_{ij} \nonumber \\
 &= \sum_{k=1}^{n} \left(a^{(1)}_{ik}x_{kj} + a^{(2)}_{jk}x_{ik}\right) + f_{ij}
 \end{align}
 Let $x_{ci}$ and $f_{ci}$ denote the $i^{th}$ column of matrix $X$ and $F$ respectively. Define vector $\tilde{x},\tilde{f}\in \R^{n^2}$ by rearranging $x_{ci}$ and $f_{ci}$:
 \begin{align*}
-\tilde{x} &= \begin{bmatrix}x_{c1} & \cdots & x_{cn}\end{bmatrix}^\top \; ,\\
-\tilde{f} &= \begin{bmatrix}f_{c1} & \cdots & f_{cn}\end{bmatrix}^\top \; .
+\tilde{x} = \begin{bmatrix}x_{c1} \\ \vdots \\ x_{cn}\end{bmatrix}, \quad
+\tilde{f} = \begin{bmatrix}f_{c1} \\ \vdots \\ f_{cn}\end{bmatrix} \; .
 \end{align*}
 Based on the equation \eqref{eq:elementwise_expression}, elements of $\dot{\tilde{x}}$ can be expressed as
 \begin{align}
@@ -109,17 +109,17 @@ which defines an affine time-varying system. To express it more explicitly, we d
 A &        &   \\
   & \ddots &   \\
   &        & A
-\end{bmatrix} \; , \\
+\end{bmatrix} \in \R^{n^2 \times n^2} \; , \\
 \tilde{A}_2 &= \begin{bmatrix}
 \text{diag}(a^{(2)}_{11}) & \text{diag}(a^{(2)}_{12}) & \cdots &\text{diag}(a^{(2)}_{1n}) \\
 \text{diag}(a^{(2)}_{21}) & \text{diag}(a^{(2)}_{22}) & \cdots &\text{diag}(a^{(2)}_{2n}) \\
 \vdots & \vdots & \ddots & \vdots \\
 \text{diag}(a^{(2)}_{n1}) & \text{diag}(a^{(2)}_{n2}) & \cdots &\text{diag}(a^{(2)}_{nn}) \\
-\end{bmatrix} \; ,
+\end{bmatrix} \in \R^{n^2 \times n^2} \; ,
 \end{align*}
-where $\text{diag}(a^{(2)}_{ij})$ denotes an $n \times n$ diagonal matrix whose diagonal elements are all $a^{(2)}_{ij}$. Then the system can be fully describe by an affine time-varying system in the standard form:
+where $\text{diag}(a^{(2)}_{ij})$ denotes an $n \times n$ diagonal matrix whose diagonal elements are all $a^{(2)}_{ij}$. Then the system can be fully described by an affine time-varying system in the standard form:
 \begin{align*}
-\dot{\tilde{x}}(t) = \left(\tilde{A}_1(t)+\tilde{A}_2(t)\right)\tilde{x}(t)+f(t)
+\dot{\tilde{x}}(t) = \left(\tilde{A}_1(t)+\tilde{A}_2(t)\right)\tilde{x}(t)+\tilde{f}(t)
 \end{align*} \par
 
 \noindent {\bf Solution 1.2} \\
@@ -168,10 +168,22 @@ Define $g(X) = \dot{X}$, $\forall X_1,X_2 \in \R^{n \times n}, \forall t \geq t_
 &= (\norm{A_1}+\norm{A_2^T})\norm{X_1-X_2} \\
 &\defeq K(t)\norm{X_1(t)-X_2(t)}
 \end{align*}
-Therefore, $g(X)$ is globally Lipschitz with respect to $X$ and piece-wise continuous with respect to $t$, which indicates the uniqueness of the solution to the matrix differential equation. Thus, $M(t,\tau) = F(\tau)\Phi_2^T(t,\tau)$ is unique. To conclude,
+Therefore, $g(X)$ is globally Lipschitz with respect to $X$ and piece-wise continuous with respect to $t$, which indicates the uniqueness of the solution to the matrix differential equation. Thus, the value of $\int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau$ is unique and $\forall t$
 \begin{align*}
-M(t,\tau) = F(\tau)\Phi_2^T(t,\tau)
+\int_{t_0}^{t}\Phi_1(t,\tau)F(\tau)\Phi_2^T(t,\tau)\mathrm{d}\tau = \int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau \; .
 \end{align*}
+However, we cannot make sure the uniqueness of $M(t,\tau)$. For example, any $\tilde{M}(t,\tau)$ defined as
+\begin{align*}
+\tilde{M}(t,\tau) = \begin{cases}
+F(\tau)\Phi_2^T(t,\tau) & t \notin \mathcal{D} \\
+K & t \in \mathcal{D}
+\end{cases}
+\end{align*}
+where $K$ is any finite real number, and $\mathcal{D}$ stands for the discontinuity set of $\tilde{M}(t,\tau)$. Then, $\tilde{M}(t,\tau)$ is also a valid solution to the matrix differential equation since
+\begin{align*}
+\forall t \geq t_0, \int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau =  \int_{t_0}^{t}\Phi_1(t,\tau)\tilde{M}(t,\tau)\de\tau
+\end{align*}
+
 
 \clearpage
 
