@@ -130,13 +130,13 @@ Then, start with $\|A\|_2^2$:
 \begin{align*}
 \|A\|_2^2&=\left(\supx\frac{\|Ax\|_2}{\|x\|_2}\right)^2=\supx\frac{\|Ax\|_2^2}{\|x\|_2^2} = \supx \frac{\sum_{i=1}^{m} \left(Ax\right)_i^2}{\sum_{i=1}^{n} x_i^2} \geq \supx \frac{\sum_{i=1}^{m} \left(Ax\right)_i^2}{\sum_{i=1}^{n} x_{max}^2} \\
 &=\supx \frac{1}{n}\frac{\sum_{i=1}^{m} \left(Ax\right)_i^2}{x_{max}^2} \geq \supx \frac{1}{n}\frac{\left(Ax\right)_{max}^2}{x_{max}^2} = \supx \frac{1}{n} \left(\frac{\left(Ax\right)_{max}}{x_{max}}\right)^2 \\
-&= \frac{1}{n}  \left(\supx\frac{\left(Ax\right)_{max}}{x_{max}}\right)^2 =\frac{1}{n} \left(\supx \frac{\|Ax\|_\infty}{\|x\|_\infty}\right)^2= \frac{1}{n}\|Ax\|_\infty \\
-&\Rightarrow \|A\|_2 \geq \frac{1}{\sqrt{n}}\|Ax\|_\infty
+&= \frac{1}{n}  \left(\supx\frac{\left(Ax\right)_{max}}{x_{max}}\right)^2 =\frac{1}{n} \left(\supx \frac{\|Ax\|_\infty}{\|x\|_\infty}\right)^2= \frac{1}{n}\|A\|_\infty \\
+&\Rightarrow \|A\|_2 \geq \frac{1}{\sqrt{n}}\|A\|_\infty
 \end{align*}
 \begin{align*}
 \|A\|_2^2&=\left(\supx\frac{\|Ax\|_2}{\|x\|_2}\right)^2=\supx\frac{\|Ax\|_2^2}{\|x\|_2^2} = \supx \frac{\sum_{i=1}^{m} \left(Ax\right)_{i}^2}{\sum_{i=1}^{n} x_i^2} \leq \supx \frac{\sum_{i=1}^{m} \left(Ax\right)_{max}^2}{\sum_{i=1}^{n} x_{i}^2} \\&= \supx \frac{m \left(Ax\right)_{max}^2}{\sum_{i=1}^{n} x_{i}^2} = m\supx \frac{\left(Ax\right)_{max}^2}{\sum_{i=1}^{n} x_{i}^2} \leq m\supx \frac{\left(Ax\right)_{max}^2}{x_{max}^2} = m\supx \left(\frac{\left(Ax\right)_{max}}{x_{max}}\right)^2 \\
-&=m\left(\supx \frac{\left(Ax\right)_{max}}{x_{max}}\right)^2 = m\left(\supx \frac{\|Ax\|_\infty}{\|x\|_\infty}\right)^2 = m\|Ax\|_\infty \\
-&\Rightarrow \|A\|_2 \leq \sqrt{m}\|Ax\|_\infty
+&=m\left(\supx \frac{\left(Ax\right)_{max}}{x_{max}}\right)^2 = m\left(\supx \frac{\|Ax\|_\infty}{\|x\|_\infty}\right)^2 = m\|A\|_\infty \\
+&\Rightarrow \|A\|_2 \leq \sqrt{m}\|A\|_\infty
 \end{align*}
 
 \clearpage
@@ -351,9 +351,5 @@ Take the gradient of the system dynamics:
 \abs{\frac{\partial p_2}{\partial x_2}} &= \abs{-2} \leq -2 \defeq K_{22}(t)
 \end{align*}
 Since the derivative is bounded, $p(x,t)$ is globally Lipschitz with respect to $x$. Obviously, $p(x,t)$ is continuous with respect to $t$. By existence and uniqueness of the linear ordinary differential equation, the system admits a unique solution. \\
-
-\textbf{Question} \\
-
-If I can get a solution manually and the function is differentiable, does this imply the function is Lipschitz continuous? Because the existence of solution means $x$ can be explicitly expressed as a function of $t$ and the derivative can also be expressed as a function of $t$, whose norm can be further defined as $K(t)$.
 
 \end{document}
