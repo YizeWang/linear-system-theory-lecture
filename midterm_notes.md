@@ -8,3 +8,8 @@
 
 - continuous function
 - change of bases
+- any conclusion of exponentially stable and uniform stable
+
+# To Do
+
+- Prove $$e^{At}=T^{-1}e^{Jt}T$$
