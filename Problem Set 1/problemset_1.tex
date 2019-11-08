@@ -9,13 +9,6 @@
 \baselineskip 7mm
 \oddsidemargin -.15in
 
-\usepackage{psfrag}
-\usepackage[dvips]{epsfig}
-\usepackage{amsmath,amssymb}
-\usepackage{theorem}
-\usepackage{epsfig}
-\usepackage{color}
-
 % import packages
 \usepackage{color}
 \usepackage{epsfig}
@@ -30,7 +23,7 @@
 \def\dim{{\mbox{\em dim}}}
 \def\ifpart{\textbf{(if) }}
 \def\rank{{\mbox{\sc Rank}}}
-\def\null{{\mbox{\sc Null}}}
+\def\nullspace{{\mbox{\sc Null}}}
 \def\range{{\mbox{\sc Range}}}
 \def\domain{{\mbox{\em domain}}}
 \def\nullity{{\mbox{\sc Nullity}}}
@@ -40,8 +33,10 @@
 % define new commands and environment
 \newtheorem{lemma}{Lemma}
 \newtheorem{proof}{Proof}
+\newcommand{\de}{\mathrm{d}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
+\newcommand{\I}{\mathbb{I}}
 \newcommand{\A}{\mathcal{A}}
 \newcommand{\B}{\mathcal{B}}
 \newcommand{\defeq}{\vcentcolon=}
@@ -56,6 +51,7 @@
 \begin{document}
 \thispagestyle{plain}
 
+% title
 \vspace*{-1.5cm}{\noindent \rule{15.8cm}{.3mm} \\[.3cm]}
 \begin{center} \bf
 {\large Linear System Theory \medskip \\
@@ -193,10 +189,10 @@ $\begin{cases}
 
 \noindent {\bf Solution 2.2}
 \begin{align*}
-&\range (\A) \cap \null (\B) \subseteq \null (\B) \\
-\Leftrightarrow& \dim \left( \range (\A) \cap \null (\B) \right) \leq \dim (\null(\B))\\
-\Leftrightarrow& \dim \left( \range (\A) \cap \null (\B) \right) \leq \dim (\null(\B)) + \dim (\null(\A)) \\
-\Leftrightarrow& \dim \left( \null(\B \circ \A) \right) \leq \dim (\null(\B)) + \dim (\null(\A)) \\
+&\range (\A) \cap \nullspace (\B) \subseteq \nullspace (\B) \\
+\Leftrightarrow& \dim \left( \range (\A) \cap \nullspace (\B) \right) \leq \dim (\nullspace(\B))\\
+\Leftrightarrow& \dim \left( \range (\A) \cap \nullspace (\B) \right) \leq \dim (\nullspace(\B)) + \dim (\nullspace(\A)) \\
+\Leftrightarrow& \dim \left( \nullspace(\B \circ \A) \right) \leq \dim (\nullspace(\B)) + \dim (\nullspace(\A)) \\
 \Leftrightarrow& n - \dim \left( \range(\B \circ \A) \right) \leq m - \dim (\range(\B)) + n - \dim (\range(\A)) \\
 \Leftrightarrow& \dim (\range(\A)) + \dim (\range(\B)) - m \leq \dim \left( \range(\B \circ \A) \right)
 \end{align*}
