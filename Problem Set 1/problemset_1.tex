@@ -105,10 +105,11 @@ Issue date: September 19, 2019 \\ Due date: October 7, 2019}
 		\item \textbf{commutative}: \\
 		$\forall f_1, f_2 \in F, f_1 \oplus f_2 = f_1 f_2 = f_2 f_1 = f_2 \oplus f_1$
 		\item \textbf{identity}: \\
-		Define $f_0(x) = 1, \forall x \in S$. $F = \{f: S\rightarrow \R_+ \} \Rightarrow f_0 \in F$. \\
-		$\forall f \in F, f \oplus f_0 = f \cdot 1 = f$.
+		Define $\theta(x) = 1, \forall x \in S$ \\
+		$F = \{f: S\rightarrow \R_+ \} \Rightarrow \theta(x) \in F$ \\
+		$\forall f \in F, f \oplus \theta = f \cdot 1 = f$
 		\item \textbf{inverse}: \\
-		$\forall f \in F, f(x) \in \R_+, f(x) > 0, \frac{1}{f} > 0, \frac{1}{f} \in F, f \oplus \frac{1}{f} = f(x) \cdot \frac{1}{f(x)} = 1$
+		$\forall f \in F, f(x) \in \R_+, f(x) > 0, f^{-}(x) = \frac{1}{f(x)} > 0, f^{-} \in F, f \oplus f^{-} (x) = f(x) \cdot \frac{1}{f(x)} = 1$
 	\end{itemize}
 	\item \bf{scalar multiplication}
 	\begin{itemize}
@@ -123,17 +124,17 @@ Issue date: September 19, 2019 \\ Due date: October 7, 2019}
 		\item $\forall a \in \R, \forall f_1, f_2 \in F, a \odot (f_1 \oplus f_2) = a \odot (f_1 f_2) = \left(f_1 f_2\right)^a = f_1^a f_2^a = (a \odot f_1) \oplus (a \odot f_2)$
 	\end{itemize}
 \end{itemize}
-Therefore, $(F, \R, \oplus,\odot)$ is a linear space and the zero-vector is $1$. \\
+Additionally, the addition and multiplication are closed in space $F$. Therefore, $(F, \R, \oplus,\odot)$ is a linear space and the zero-vector is $1$. \\
 
 \noindent {\bf Solution 1.2}
 
 \begin{itemize}
 	\item $\{f_1,f_2\}$ \\
-	For the sake of contradiction, we assume $\{f_1,f_2\}$ are linearly dependent so that \\
+	Assume, for the sake of contradiction, $\{f_1,f_2\}$ are linearly dependent such that \\
 	$\exists c_1 ,c_2 \in \R \text{ which are not both 0 such that} \left( c_1 \odot f_1(x) \right) \oplus \left( c_2 \odot f_2(x) \right) = 1$ \\
 	$x = a$: $\left( c_1 \odot 2 \right) \oplus \left( c_2 \odot 1 \right) = 1 \Rightarrow 2^{c_1} \cdot 1^{c_2} = 2^{c_1} = 1 \Rightarrow c_1 = 0$ \\
 	$x = b$: $\left( 0 \odot 1 \right) \oplus \left( c_2 \odot 3 \right) = 1 \Rightarrow 2^{0} \cdot 3^{c_2} = 3^{c_2} = 1 \Rightarrow c_2 = 0$ \\
-	$c_1 = c_2 = 0 \text{ contradict our assumption} \Rightarrow \{f_1, f_2\} \text{ must be linearly independent.}$ 	
+	$c_1 = c_2 = 0$ contradicts our assumption $\Rightarrow \{f_1, f_2\}$ are linearly independent
 	\item $\{f_1,f_3\}$ \\
 	$\{f_1,f_3\}$ are linearly dependent, if we can find $c_1 ,c_2 \in \R$ that are not both $0$ such that \\
 	$\left( c_1 \odot f_1(x) \right) \oplus \left( c_2 \odot f_3(x) \right) = 1$ \\
@@ -166,47 +167,46 @@ Let $(F, +, \cdot)$ be a field and consider the linear maps $\mathcal{A} : (F^n,
 
 
 \noindent {\bf Solution 2.1} \\
-The first inequality is trivial since the number of vectors of a basis should definitely non-negative, i.e., $0 \leq \dim(\range(\mathcal{A}))$. For the second inequality, we first prove a lemma.
+The left inequality is trivial since the number of vectors of a basis should definitely be non-negative, i.e., $0 \leq \dim(\range(\mathcal{A}))$. For the right inequality, we first recall a lemma.
 \begin{lemma}
 	If $(V,F)$ has dimension $n$ then any set of $n+1$ or more vectors is linearly dependent.
 \end{lemma}
-\begin{proof}
-	For the sake of contradiction, we assume that there exists a set of $n+k\left(k>0, k \in \N\right)$ linearly independent vectors $\{v_1, \dots,v_{n+k}\}$, then $\dim(span(\{v_1, \dots,v_{n+k}\}))=n+k$. \\
-	Since $\{v_1, \dots,v_{n+k}\} \subseteq (V,F)$, $span(\{v_1, \dots,v_{n+k}\}) \subseteq (V,F)$, \\
-	$n+k = \dim(span(\{v_1, \dots,v_{n+k}\})) \leq \dim((V,F)) = n$, which leads to contradiction.
-\end{proof}
-Next, we prove $\dim(\range(\A)) \leq m$. For the sake of contradiction, assume $\dim(\range(\A)) = p > m$, \\
-and a basis of $\range(\A)$ is $\{v_1,\dots,v_p\}$, which are linearly independent. \\
+Next, we prove $\dim(\range(\A)) \leq m$. Assume, for the sake of contradiction, $\dim(\range(\A)) = p > m$, \\
+and a basis of $\range(\A)$ is $\{v_1,\dots,v_p\}$, which are linearly independent by definition. \\
 The fact that linearly independent vectors $\{v_1,\dots,v_p\} \subseteq \range(\A) \subseteq (V,F)$ and the dimension of $(V,F)$ is $m<p$ contradict the lemma. Therefore $\range(\A) \leq m$. \\
-Finally, we prove $\dim(\range(\A)) \leq n$. $\forall v \in V, \exists u \in U, \A(u)=v$. Let $\{e_1,\dots,e_n\}$ be a basis of $U$. \\
-$\forall u \in U, \exists a_1, \dots, a_n, u = a_1 e_1 + \cdots + a_n e_n$, where $a_i$ are not all $0$. \\
-Therefore, $\forall v \in V, v = \A (u) = \A \left(a_1 e_1 + \cdots + a_n e_n\right) = a_1 \A(e_1) + \cdots + a_n \A(e_n)$. If $\{\A(e_1), \dots, \A(e_n)\}$ are linearly independent, then $\dim(\range(\A)) = n$, otherwise $\dim(\range(\A)) < n$. \\
+
+Finally, we prove $\dim(\range(\A)) \leq n$. $\forall v \in \range(\A), \exists u \in U, \A(u)=v$. Let $\{e_1,\dots,e_n\}$ be a basis of $U$. $\forall u \in U, \exists a_1, \dots, a_n, u = a_1 e_1 + \cdots + a_n e_n$, where $a_i$ are not all $0$. \\
+Therefore, $\forall v \in \range(\A), v = \A (u) = \A \left(a_1 e_1 + \cdots + a_n e_n\right) = a_1 \A(e_1) + \cdots + a_n \A(e_n)$. If $\{\A(e_1), \dots, \A(e_n)\}$ are linearly independent, then $\dim(\range(\A)) = n$, otherwise $\dim(\range(\A)) < n$. \\
+
 $\begin{cases}
 \dim(\range(\A)) \leq n \\
 \dim(\range(\A)) \leq m
 \end{cases} \Rightarrow$ $\dim(\range(\A)) \leq \min \{m,n\}$, which completes the proof. \\
-\ \\
 
-\noindent {\bf Solution 2.2}
-\begin{align*}
-&\range (\A) \cap \nullspace (\B) \subseteq \nullspace (\B) \\
-\Leftrightarrow& \dim \left( \range (\A) \cap \nullspace (\B) \right) \leq \dim (\nullspace(\B))\\
-\Leftrightarrow& \dim \left( \range (\A) \cap \nullspace (\B) \right) \leq \dim (\nullspace(\B)) + \dim (\nullspace(\A)) \\
-\Leftrightarrow& \dim \left( \nullspace(\B \circ \A) \right) \leq \dim (\nullspace(\B)) + \dim (\nullspace(\A)) \\
-\Leftrightarrow& n - \dim \left( \range(\B \circ \A) \right) \leq m - \dim (\range(\B)) + n - \dim (\range(\A)) \\
-\Leftrightarrow& \dim (\range(\A)) + \dim (\range(\B)) - m \leq \dim \left( \range(\B \circ \A) \right)
-\end{align*}
+\vspace{0.6em}
+
+\noindent {\bf Solution 2.2} \\
+Define $\tilde{\B}$ as a restriction of $\B$, $\tilde{\B}:\range(\A) \rightarrow F^p$ \\
+$\range(A)\subseteq F^m \Rightarrow \nullspace(\tilde{\B}) \subseteq \nullspace(\B)$ \\
+Further, $\range(\tilde{\B}) = \range(\B\circ\A)$ by construction
+\begin{flalign*}
+\dim(\range(\A)) &= \dim(\nullspace(\tilde{\B})) + \dim(\range(\tilde{\B})) &\\
+&\leq \dim(\nullspace(\B)) + \dim(\range(\tilde{\B})) &\\
+&= \dim(\nullspace(\B)) + \dim(\range(\B\circ\A)) &\\
+&= m-\dim(\range(\B)) + \dim(\range(\B\circ\A))
+\end{flalign*}
+Therefore, $\dim(\range(\mathcal{A})) + \dim(\range(\mathcal{B})) - m \leq \dim(\range(\mathcal{B}\circ\mathcal{A}))$. \\
 
 \noindent {\bf Solution 2.3} \\
-
-$\range(\A) \in F^m \Rightarrow \range(\B \circ \A) \subseteq \range(\B) \Rightarrow \dim(\range(\B \circ \A)) \leq \dim(\range(\B))$ \\
+$\range(\B \circ \A) \subseteq \range(\B) \Rightarrow \dim(\range(\B \circ \A)) \leq \dim(\range(\B))$ \\
 Let $\{v_1, \dots, v_r\}$ be a set of basis of $\range(\A)$. \\
 $\range(\B \circ \A) = \{l \in F^p | \exists w \in \range(\A), \B (w) = l\}$. \\
-Since $\range(\A) = span (\{v_1, \dots, v_r\})$, $\forall w \in \range(\A), \exists c_1, \dots, c_r \in F, w = c_1 v_1 + \cdots + c_r v_r$. \\
-Due to the linear map $\B$, $\B (w) = c_1 \B (v_1) + \cdots + c_r \B (v_r)$. \\
-$\forall l \in F^p, \exists w \in \range(\A), \exists c_1, \dots, c_r, l=\B(w)=\B(c_1 v_1 + \cdots + c_r v_r) = c_1 \B(v_1) + \cdots + c_r \B(v_r)$. \\
+$\range(\A) = span (\{v_1, \dots, v_r\}) \Rightarrow \forall w \in \range(\A), \exists c_1, \dots, c_r \in F, w = c_1 v_1 + \cdots + c_r v_r$ \\
+$\B (w) = c_1 \B (v_1) + \cdots + c_r \B (v_r)$. \\
+$\forall l \in F^p, \exists w \in \range(\A), \exists c_1, \dots, c_r, l=\B(w)=\B(c_1 v_1 + \cdots + c_r v_r) = c_1 \B(v_1) + \cdots + c_r \B(v_r)$ \\
 If $\{\B(v_1),\dots,\B(v_r)\}$ are linearly independent, $\dim(\range(\B \circ \A)) = r = \dim(\range(\A))$, \\
 otherwise $\dim(\range(\B \circ \A)) < r = \dim(\range(\A))$. \\
+
 $\begin{cases}
 \dim(\range(\B \circ \A)) \leq \dim(\range(\A)) \\
 \dim(\range(\B \circ \A)) \leq \dim(\range(\B))
@@ -228,21 +228,14 @@ where $U$ has finite dimension $n$.
 	with respect to this basis.\\
 \end{enumerate}
 
-{\bf Solution 3.1} \\
+{\bf Solution 3.1}
 \begin{align*}
-\A(\nu_1) &= \lambda \nu_1 + \nu_2 \\
-\A(\nu_2) &= \lambda \nu_2 + \nu_3 \\
+y_1 = \A(\nu_1) &= \lambda \nu_1 + \nu_2 \Rightarrow a_{11} = \lambda, a_{21} = 1 \\
+y_2 = \A(\nu_2) &= \lambda \nu_2 + \nu_3 \Rightarrow a_{22} = \lambda, a_{32} = 1\\
 		  &\; \; \vdots \\
-\A(\nu_{n-1}) &= \lambda \nu_{n-1} + \nu_n \\
-\A(\nu_n) &= \lambda \nu_n
-\end{align*}
-
-\begin{align*}
-a_{ij} = \begin{cases}
-\lambda & i = j \\
-1 & i = j + 1 \\
-0 & otherwise
-\end{cases} \Rightarrow A = \left[\begin{matrix}
+y_{n-1} = \A(\nu_{n-1}) &= \lambda \nu_{n-1} + \nu_n \Rightarrow a_{n-1,n-1} = \lambda, a_{n,n-1} = 1\\
+y_n = \A(\nu_n) &= \lambda \nu_n \Rightarrow a_{nn} = \lambda \\
+&\Rightarrow A = \left[\begin{matrix}
 \lambda & & & & \\
 1 & \lambda & & & \\
 & 1 & \ddots & & \\
@@ -255,18 +248,22 @@ a_{ij} = \begin{cases}
 {\bf Solution 3.2} \\
 
 $\A:(U,F) \rightarrow (U,F) \Rightarrow \A^n(b) \in U$. \\
-Since the set $\{b, {\A}(b), {\A} \circ {\A}(b), \ldots, {\A}^{n-1}(b)\}$ is linearly independent and $\dim(U) = n$, \\
-$\exists c_1,\dots,c_n \in F$, which are not all zero, such that $\A^n(b) = c_1b + \cdots + c_n\A^{n-1}(b)$. \\
+Since $\{b, {\A}(b), {\A} \circ {\A}(b), \ldots, {\A}^{n-1}(b)\}$ are linearly independent and $\dim(U) = n$, \\
+$\exists c_1,\dots,c_n \in F$, which are not all zero, such that $\A^n(b) = c_1b + \cdots + c_n\A^{n-1}(b)$
 
-$a_{ij} = \begin{cases}
-1 & i = j + 1 \\
-c_j & j = n \\
-0 & otherwise
-\end{cases} \Rightarrow A = \left[\begin{matrix}
-1 & & & & c_1\\
-& 1 & & & \vdots \\
-&  & \ddots & & \vdots\\
+\begin{align*}
+y_1 = \A(b) &= \A(b) \Rightarrow a_{21} = 1 \\
+y_2 = \A(\A(b)) &= \A^2(b) \Rightarrow a_{32} = 1\\
+&\; \; \vdots \\
+y_{n-1} = \A(\A^{n-2}(b)) &= \A^{n-1}(b) \Rightarrow a_{n,n-1} = 1 \\
+y_n = \A(\A^{n-1}(b)) &= \A^n(b) \Rightarrow a_{jn} = c_j, j=1,\dots,n \\
+&\Rightarrow A = \left[\begin{matrix}
+ & & & & c_1\\
+1 &  & & & \vdots \\
+& 1 & & & \vdots\\
+& & \ddots & & \vdots \\
 & &  & 1 & c_n
-\end{matrix}\right]$
+\end{matrix}\right]
+\end{align*}
 
 \end{document}
