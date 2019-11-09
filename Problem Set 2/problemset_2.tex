@@ -113,12 +113,12 @@ Based on your computations, what can you say about equivalence of these norms?
 		&\leq \max_{t \in [t_0, t_1]} \| f \|_p + \max_{t \in [t_0, t_1]} \|g\|_p \\
 		&= \|f\|_\infty + \|g\|_\infty
 	\end{align*}
-	\item $\forall f \in C([t_0, t_1], \R^n), \forall a \in \R, \|af\| = a\|f\|$
+	\item $\forall f \in C([t_0, t_1], \R^n), \forall a \in \R, \|af\| = \abs{a}\|f\|$
 	\begin{align*}
 		\forall f \in C([t_0, t_1], \R^n), \forall a \in \R, \|af\| &= \max_{t \in [t_0, t_1]} \| af \|_p \\
-		&= \max_{t \in [t_0, t_1]} a \| f \|_p \\
-		&= a \max_{t \in [t_0, t_1]} \| f \|_p \\
-		&= a\| f \|_\infty \\
+		&= \max_{t \in [t_0, t_1]} \abs{a} \| f \|_p \\
+		&= \abs{a} \max_{t \in [t_0, t_1]} \| f \|_p \\
+		&= \abs{a} \| f \|_\infty \\
 	\end{align*}
 	\item $\|f\|=0 \Leftrightarrow f = 0$ \\
 	$\Rightarrow: \|f\|=0\Rightarrow\max_{t \in [t_0, t_1]} \| f \|_p = 0$, $\|f\|_p \geq 0 \Rightarrow \|f\|_p = 0, \forall t \in [t_0, t_1] \Rightarrow f = 0$ \\
@@ -129,17 +129,15 @@ Based on your computations, what can you say about equivalence of these norms?
 
 Define $x_{max}$ and $\left(Ax\right)_{max}$ to simplify further notation:
 \begin{align*}
-	x_{max} &= \max_{i\in\{1,\dots,n\}} x_i \\
-	\left(Ax\right)_{max} &= \max_{j\in\{1,\dots,m\}}\left(Ax\right)_j
+	x_{max} &= \max_{i\in\{1,\dots,n\}} \abs{x_i} \\
+	\left(Ax\right)_{max} &= \max_{j\in\{1,\dots,m\}}\abs{\left(Ax\right)_j}
 \end{align*}
 Then, start with $\|A\|_2^2$:
 \begin{align*}
 \|A\|_2^2&=\left(\supx\frac{\|Ax\|_2}{\|x\|_2}\right)^2=\supx\frac{\|Ax\|_2^2}{\|x\|_2^2} = \supx \frac{\sum_{i=1}^{m} \left(Ax\right)_i^2}{\sum_{i=1}^{n} x_i^2} \geq \supx \frac{\sum_{i=1}^{m} \left(Ax\right)_i^2}{\sum_{i=1}^{n} x_{max}^2} \\
 &=\supx \frac{1}{n}\frac{\sum_{i=1}^{m} \left(Ax\right)_i^2}{x_{max}^2} \geq \supx \frac{1}{n}\frac{\left(Ax\right)_{max}^2}{x_{max}^2} = \supx \frac{1}{n} \left(\frac{\left(Ax\right)_{max}}{x_{max}}\right)^2 \\
-&= \frac{1}{n}  \left(\supx\frac{\left(Ax\right)_{max}}{x_{max}}\right)^2 =\frac{1}{n} \left(\supx \frac{\|Ax\|_\infty}{\|x\|_\infty}\right)^2= \frac{1}{n}\|A\|_\infty \\
-&\Rightarrow \|A\|_2 \geq \frac{1}{\sqrt{n}}\|A\|_\infty
-\end{align*}
-\begin{align*}
+&= \frac{1}{n}  \left(\supx\frac{\left(Ax\right)_{max}}{x_{max}}\right)^2 =\frac{1}{n} \left(\supx \frac{\|Ax\|_\infty}{\|x\|_\infty}\right)^2= \frac{1}{n}\|A\|_\infty^2 \\
+&\Rightarrow \|A\|_2 \geq \frac{1}{\sqrt{n}}\|A\|_\infty \\
 \|A\|_2^2&=\left(\supx\frac{\|Ax\|_2}{\|x\|_2}\right)^2=\supx\frac{\|Ax\|_2^2}{\|x\|_2^2} = \supx \frac{\sum_{i=1}^{m} \left(Ax\right)_{i}^2}{\sum_{i=1}^{n} x_i^2} \leq \supx \frac{\sum_{i=1}^{m} \left(Ax\right)_{max}^2}{\sum_{i=1}^{n} x_{i}^2} \\&= \supx \frac{m \left(Ax\right)_{max}^2}{\sum_{i=1}^{n} x_{i}^2} = m\supx \frac{\left(Ax\right)_{max}^2}{\sum_{i=1}^{n} x_{i}^2} \leq m\supx \frac{\left(Ax\right)_{max}^2}{x_{max}^2} = m\supx \left(\frac{\left(Ax\right)_{max}}{x_{max}}\right)^2 \\
 &=m\left(\supx \frac{\left(Ax\right)_{max}}{x_{max}}\right)^2 = m\left(\supx \frac{\|Ax\|_\infty}{\|x\|_\infty}\right)^2 = m\|A\|_\infty \\
 &\Rightarrow \|A\|_2 \leq \sqrt{m}\|A\|_\infty
@@ -215,7 +213,7 @@ $f^{[n]}(x) = f(f^{[n-1]}(x))$, where the first iterate is given by $f^{[0]}(x)=
 
 \end{enumerate}
 
-\noindent \textbf {Solution 2.1} \\
+\noindent \textbf {Solution 2.1}
 \begin{align*}
 	f^{[0]}(x) &= x \\
 	f^{[1]}(x) &= f\left(f^{[0]}(x)\right) = f(x) \\
@@ -255,11 +253,9 @@ N&>\log_\alpha\left(\frac{\epsilon(1-\alpha)}{\norm{f(x)-x}}+\alpha^m\right) \\
 \Rightarrow \norm{f^{[m]}(x)-f^{[N]}(x)} &< \epsilon
 \end{align*}
 Therefore, $\{f^{[i]}\}_{i=0}^{\infty}$ is a Cauchy sequence.
-Note that given an arbitrary initial point $x$, we can compute the value of $\|f(x)-x\|$ so we treat $\|f(x)-x\|$ as a known constant in the proof above. Because $\left(X, \left\lVert\cdot\right\rVert\right)$ is a Banach space, $\{f^{[i]}\}_{i=0}^{\infty}$ converges to a point $f^*$.
-\begin{align*}
-	f^* &=\lim_{n\to\infty}f^{[n]}(x) = \lim_{n\to\infty}f\left(f^{[n-1]}(x)\right) = f\left(\lim_{n\to\infty}f^{[n-1]}(x)\right) = f(f^*) 
-\end{align*}
-Therefore, there exist $\bar{x}=f^*$ such that $f(\bar{x}) = \bar{x}$. Next, we prove uniqueness: For the sake of contradiction, assume there exist $\bar{x}_1,\bar{x}_2 \in X, \bar{x}_1 \neq \bar{x}_2$ such that $f(\bar{x}_1)=\bar{x}_1$ and $f(\bar{x}_2)=\bar{x}_2$.
+Note that given an arbitrary initial point $x$, we can compute the value of $\|f(x)-x\|$ so we treat $\|f(x)-x\|$ as a known constant in the proof above. Because $\left(X, \left\lVert\cdot\right\rVert\right)$ is a Banach space, $\{f^{[i]}\}_{i=0}^{\infty}$ converges to a point $\bar{x}$. \\
+
+Next, we prove the uniqueness: For the sake of contradiction, assume there exist $\bar{x}_1,\bar{x}_2 \in X, \bar{x}_1 \neq \bar{x}_2$ such that $f(\bar{x}_1)=\bar{x}_1$ and $f(\bar{x}_2)=\bar{x}_2$.
 \begin{align*}
 	\norm{f(\bar{x}_2)-f(\bar{x}_1)} =\norm{\bar{x}_2-\bar{x}_1} \leq \alpha\norm{\bar{x}_2-\bar{x}_1}	
 \end{align*}
@@ -307,7 +303,9 @@ where $x_i(t) \in \R,\, \forall i$. Prove or disprove the following statements:
 \end{enumerate}
 \end{enumerate}
 
-\noindent \textbf {Solution 3.1} \\
+\vspace{0.5em}
+
+\noindent \textbf {Solution 3.1}
 \begin{align*}
 	\dot{x} &= p(x,t) \\
 	\frac{\partial p}{\partial x} &=  \begin{mymat}\frac{\partial p_1}{\partial x_1} & \frac{\partial p_1}{\partial x_2} \\
@@ -319,43 +317,32 @@ where $x_i(t) \in \R,\, \forall i$. Prove or disprove the following statements:
 	\abs{\frac{\partial p_1}{\partial x_1}} &=  \abs{-1 - e^t \sin(x_1-x_2)} \leq 1+\abs{e^t \sin(x_1-x_2)} \leq 1+e^t\\
 	\abs{\frac{\partial p_1}{\partial x_2}} &= \abs{e^t \sin (x_1-x_2)} \leq e^t\\
 	\abs{\frac{\partial p_2}{\partial x_1}} &= \abs{\cos(x_1-x_2)} \leq 1\\
-	\abs{\frac{\partial p_2}{\partial x_2}} &=\abs{-1-\cos(x_1-x_2)}\leq 1 + \abs{-\cos(x_1-x_2)} \leq 2\\
+	\abs{\frac{\partial p_2}{\partial x_2}} &=\abs{-1-\cos(x_1-x_2)}\leq 1 + \abs{-\cos(x_1-x_2)} \leq 2
 \end{align*}
-The function $p$ is differentiable in $x_1,x_2$ and the derivative is bounded by $1+e^t$, which leads to the conclusion that the system is globally Lipschitz. It is also obvious that $p(x,t)$ is continuous in $t$. From (a) we know that $p(x,t)$ is globally Lipschitz with respect to $x$. Per \textbf{Theorem~{3.6}}, the system admits a unique solution. \\
+The function $p(x,t)$ is differentiable in $x$ and the derivative is bounded (since each element is bounded), which leads to the conclusion that $p(x,t)$ is globally Lipschitz. It is also obvious that $p(x,t)$ is continuous in $t$. From (a) we know that $p(x,t)$ is globally Lipschitz with respect to $x$. Per \textbf{Theorem~{3.6}}, the system admits a unique solution. \\
 
 \clearpage
 
 \noindent \textbf {Solution 3.2} \\
-Expand the second row of the system dynamics:
+Consider two states
 \begin{align*}
-	\dot{x}_2 &= -2x_2 \\
-	\frac{1}{x_2} \dx _2 &= -2 \dt \\
-	\ln x_2 &= -2t + c_1 \\
-	x_2 &= Be^{-2t} \\
-\end{align*}
-Plug $x_2(t)$ into the system dynamics and solve $x_1(t)$:
-\begin{align*}
-	\dot{x}_1 &= -3 \sin (t) + x_2 \\
-	\frac{1}{x_1}\dx _1 &= -3\sin (t) \dt + Be^{-2t}\dt \\
-	\ln x_1 &= 3 \cos(t) - \frac{1}{2} Be^{-2t} + c_2\\
-	x_1 &= Ae^{3 \cos(t)- \frac{1}{2} Be^{-2t}}\\
-\end{align*}
-Take the gradient of the system dynamics:
-\begin{align*}
-\dot{x} &= p(x,t) \\
-\frac{\partial p}{\partial x} &=  \begin{mymat}\frac{\partial p_1}{\partial x_1} & \frac{\partial p_1}{\partial x_2} \\
-\frac{\partial p_2}{\partial x_1} & \frac{\partial p_2}{\partial x_2}
-\end{mymat} = \begin{mymat}
--3\sin t + x_2 & x_1 \\
-0 & -2
-\end{mymat}
+\hat{x} = \begin{mymat}c\\c\end{mymat}, \theta = \begin{mymat}0\\0\end{mymat}, c\gg 0
 \end{align*}
 \begin{align*}
-\abs{\frac{\partial p_1}{\partial x_1}} &= \abs{-3\sin(t)+x_2} \leq \abs{-3\sin(t)} + \abs{x_2} \leq 3 + Be^{-2t} \defeq K_{11}(t)\\
-\abs{\frac{\partial p_1}{\partial x_2}} &= \abs{x_1} \leq \abs{Ae^{3 \cos(t)- \frac{1}{2} Be^{-2t}}} \defeq K_{12}(t) \\
-\abs{\frac{\partial p_2}{\partial x_1}} &= \abs{0} \leq 0 \defeq K_{21}(t) \\
-\abs{\frac{\partial p_2}{\partial x_2}} &= \abs{-2} \leq -2 \defeq K_{22}(t)
+\|p(\hat{x},t)-p(\theta,t)\|_\infty = \norm{\begin{mymat}
+	-3\sin(t)c+c^2\\-2c
+	\end{mymat}}_\infty&=-3\sin(t)c+c^2 \geq c^2-3c
 \end{align*}
-Since the derivative is bounded, $p(x,t)$ is globally Lipschitz with respect to $x$. Obviously, $p(x,t)$ is continuous with respect to $t$. By existence and uniqueness of the linear ordinary differential equation, the system admits a unique solution. \\
+\begin{align*}
+\forall k \in \R, \exists c=k+3,\|p(\hat{x},t)-p(\theta,t)\|_\infty \geq c^2-3c = kc = k\norm{\bar{x}-\theta}_\infty
+\end{align*}
+Therefore, the system is not globally Lipschitz continuous in $x$. \\
+
+$p_2(x_2(t),t)=\dot{x}_2(t)=-2x_2(t) \Rightarrow x_2(t) = e^{-2t}x_2(0)$\\
+$p_2(x_2(t),t)$ is piecewise continuous in $t$ and Lipschitz continuous in $x_2$ $\Rightarrow$ $x_2(t)$ admits unique solution. \\
+$p_1(x_1(t),t)=\dot{x}_1(t)=-3\sin(t)x_1(t)+x_1(t)e^{-2t}x_2(0)=\left(e^{-2t}x_2(0)-3\sin(t)\right)x_1(t)$ \\
+$p_1(x_1(t),t)$ is piecewise continuous in $t$ and Lipschitz continuous in $x_1$ $\Rightarrow$ $x_1(t)$ admits unique solution. \\
+
+Therefore, the system admits unique solution.
 
 \end{document}
