@@ -90,7 +90,7 @@ Let $x_{ij},a^{(1)}_{ij},a^{(2)}_{ij},f_{ij}$ denote the $i^{th}$ row and $j^{th
 Let $x_{ci}$ and $f_{ci}$ denote the $i^{th}$ column of matrix $X$ and $F$ respectively. Define vector $\tilde{x},\tilde{f}\in \R^{n^2}$ by rearranging $x_{ci}$ and $f_{ci}$:
 \begin{align*}
 \tilde{x} = \begin{bmatrix}x_{c1} \\ \vdots \\ x_{cn}\end{bmatrix}, \quad
-\tilde{f} = \begin{bmatrix}f_{c1} \\ \vdots \\ f_{cn}\end{bmatrix} \; .
+\tilde{f} = \begin{bmatrix}f_{c1} \\ \vdots \\ f_{cn}\end{bmatrix}
 \end{align*}
 Based on the equation \eqref{eq:elementwise_expression}, elements of $\dot{\tilde{x}}$ can be expressed as
 \begin{align}
@@ -113,7 +113,8 @@ A &        &   \\
 \end{align*}
 where $\text{diag}(a^{(2)}_{ij})$ denotes an $n \times n$ diagonal matrix whose diagonal elements are all $a^{(2)}_{ij}$. Then the system can be fully described by an affine time-varying system in the standard form:
 \begin{align*}
-\dot{\tilde{x}}(t) = \left(\tilde{A}_1(t)+\tilde{A}_2(t)\right)\tilde{x}(t)+\tilde{f}(t)
+\dot{\tilde{x}}(t) &= \left(\tilde{A}_1(t)+\tilde{A}_2(t)\right)\tilde{x}(t)+\tilde{f}(t)\\
+&\defeq A(t)\tilde{x}(t)+b(t)
 \end{align*} \par
 
 \noindent {\bf Solution 1.2} \\
@@ -151,18 +152,15 @@ R &= -\left( \int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau \right) A_2^T(t)+\int_
 \end{align*}
 Therefore, $X(t) = \Phi_1(t,t_0) X_0 \Phi^T_2(t,t_0) + \int_{t_0}^{t}\Phi_1(t,\tau)F(\tau)\Phi_2^T(t,\tau)\mathrm{d}\tau$ is a solution to the differential equation. Next we prove the uniqueness of the solution. \\
 
-Define $g(X) = \dot{X}$, $\forall X_1,X_2 \in \R^{n \times n}, \forall t \geq t_0$,
+Define $p(\tilde{x}(t),t) = \dot{\tilde{x}}(t)$, $\forall \tilde{x}_1,\tilde{x}_2 \in \R^n, \forall t \geq t_0$,
 \begin{align*}
-\norm{g(X_1)-g(X_2)} &= \norm{\dot{X}_1-\dot{X}_1} \\
-&=\norm{\left(A_1X_1 + X_1 A^T_2 + F\right)-\left(A_1X_2 + X_2 A^T_2 + F\right)} \\
-&=\norm{A_1X_1-A_1X_2+ X_1 A^T_2- X_2A^T_2} \\
-&=\norm{A_1(X_1-X_2)+ (X_1-X_2)A^T_2} \\
-&\leq \norm{A_1(X_1-X_2)} + \norm{(X_1-X_2)A^T_2} \\
-&\leq \norm{A_1}\norm{X_1-X_2} + \norm{X_1-X_2}\norm{A^T_2} \\
-&= (\norm{A_1}+\norm{A_2^T})\norm{X_1-X_2} \\
-&\defeq K(t)\norm{X_1(t)-X_2(t)}
+\norm{p(\tilde{x}_1(t),t)-p(\tilde{x}_2(t),t)} &= \norm{\dot{\tilde{x}}_1(t)-\dot{\tilde{x}}_2(t)} \\
+&=\norm{\left(A(t)\tilde{x}_1(t)+b(t)\right)-\left(A(t)\tilde{x}_2(t)+b(t)\right)} \\
+&=\norm{A(t)\left(\tilde{x}_1(t)-\tilde{x}_2(t)\right)} \\
+&\leq\norm{A(t)}\norm{\tilde{x}_1(t)-\tilde{x}_2(t)}\\
+&\defeq K(t)\norm{\tilde{x}_1(t)-\tilde{x}_2(t)}
 \end{align*}
-Therefore, $g(X)$ is globally Lipschitz with respect to $X$ and piece-wise continuous with respect to $t$, which indicates the uniqueness of the solution to the matrix differential equation. Thus, the value of $\int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau$ is unique and $\forall t$
+Therefore, $p(\tilde{x}(t),t)$ is globally Lipschitz with respect to $\tilde{x}(t)$ and piece-wise continuous with respect to $t$, which indicates the uniqueness of the solution to the matrix differential equation. Thus, the value of $\int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau$ is unique and $\forall t$
 \begin{align*}
 \int_{t_0}^{t}\Phi_1(t,\tau)F(\tau)\Phi_2^T(t,\tau)\mathrm{d}\tau = \int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau \; .
 \end{align*}
@@ -173,7 +171,7 @@ F(\tau)\Phi_2^T(t,\tau) & t \notin \mathcal{D} \\
 K & t \in \mathcal{D}
 \end{cases}
 \end{align*}
-where $K$ is any finite real number, and $\mathcal{D}$ stands for the discontinuity set of $\tilde{M}(t,\tau)$. Then, $\tilde{M}(t,\tau)$ is also a valid solution to the matrix differential equation since
+where $K$ is any finite real number, and $\mathcal{D}$ stands for the finite discontinuity set of $\tilde{M}(t,\tau)$. Then, $\tilde{M}(t,\tau)$ is also a valid solution to the matrix differential equation since
 \begin{align*}
 \forall t \geq t_0, \int_{t_0}^{t}\Phi_1(t,\tau)M(t,\tau)\de\tau =  \int_{t_0}^{t}\Phi_1(t,\tau)\tilde{M}(t,\tau)\de\tau
 \end{align*}
